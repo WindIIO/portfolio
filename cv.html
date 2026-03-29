@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - Lucas Ribet</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0a0a0e;
+        color: #fff;
+      }
+      .topbar {
+        width: 100%;
+        padding: 1rem;
+        background: #12141b;
+        border-bottom: 1px solid #272b38;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .topbar a {
+        color: #3f8efc;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .viewer {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100vh - 120px);
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        margin: 1.2rem auto;
+        border: 1px solid #222;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+      .fallback {
+        padding: 1.5rem;
+        text-align: center;
+        color: #c2c2c2;
+      }
+      .fallback a {
+        color: #3f8efc;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>CV Support IT - Lucas Ribet</div>
+      <a href="index.html">Retour au portfolio</a>
+    </header>
+
+    <main>
+      <img
+        class="viewer"
+        src="img/CV_Support_IT_Ribet.pdf.jpg"
+        alt="CV Lucas Ribet"
+      />
+      <div class="fallback">
+        Si l'image ne s'affiche pas,
+        <a
+          href="img/CV_Support_IT_Ribet.pdf.jpg"
+          target="_blank"
+          rel="noopener noreferrer"
+          >cliquez ici pour ouvrir le CV</a
+        >.
+      </div>
+    </main>
+  </body>
+</html>

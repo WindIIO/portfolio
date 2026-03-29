@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucas Ribet - Technicien Support IT</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a href="#" class="logo">Lucas Ribet</a>
+        <nav>
+          <a href="#hero" class="nav-link">Accueil</a>
+          <a href="#skills" class="nav-link">Compétences</a>
+          <a href="#projects" class="nav-link">Projets</a>
+          <a href="#experience" class="nav-link">Expérience</a>
+          <a href="#objective" class="nav-link">Objectif</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <button id="mobile-menu" aria-label="Ouvrir menu mobile">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- SECTION HERO -->
+      <section id="hero" class="hero reveal">
+        <div class="overlay"></div>
+        <div class="hero-content container">
+          <img
+            src="img/ma_photo.png"
+            alt="Photo de Lucas Ribet"
+            class="profile-img"
+          />
+          <h1>Lucas Ribet</h1>
+          <p class="subtitle">
+            Technicien Support IT & Développeur en progression
+          </p>
+          <p class="description">
+            Passionné par l’assistance technique, l’automatisation et la
+            résolution de problèmes, je développe mes compétences dans les
+            environnements systèmes et réseaux.
+          </p>
+          <div class="hero-buttons">
+            <button id="btn-projects" class="btn primary">
+              Voir mes projets
+            </button>
+            <a
+              href="img/CV_Support_IT_Ribet.pdf.jpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn secondary"
+              >Voir mon CV</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION COMPETENCES -->
+      <section id="skills" class="skills reveal">
+        <div class="container">
+          <h2>Compétences</h2>
+          <div class="skill-grid">
+            <article class="skill-card">
+              <h3>Support IT</h3>
+              <p>
+                Diagnostic et résolution d’incidents niveau 1, assistance
+                utilisateur, maintenance de postes.
+              </p>
+            </article>
+            <article class="skill-card">
+              <h3>Outils</h3>
+              <p>
+                Windows, PowerShell, GitHub, outils de diagnostic (HWiNFO,
+                CrystalDiskInfo).
+              </p>
+            </article>
+            <article class="skill-card">
+              <h3>Développement</h3>
+              <p>
+                HTML, CSS, JavaScript (bases), création de sites web simples.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION PROJETS -->
+      <section id="projects" class="projects">
+        <div class="container">
+          <h2>Projets</h2>
+          <p class="section-intro">
+            Quelques réalisations pour montrer mes compétences techniques.
+          </p>
+          <div class="cards">
+            <article class="card reveal">
+              <h3>🔍 Scanner de composants PC</h3>
+              <p>
+                Cet outil permet à l’utilisateur de détecter rapidement les
+                composants matériels de son ordinateur : CPU, RAM, GPU,
+                stockage, navigateur et système d’exploitation. Les informations
+                sont affichées sous forme de cartes claires et l’utilisateur
+                peut exporter les données en JSON.
+              </p>
+              <a href="scanner-pc.html" class="btn tertiary"
+                >Voir le scanner PC</a
+              >
+            </article>
+
+            <article class="card reveal">
+              <h3>📶 Test de connexion Internet</h3>
+              <p>
+                Cet outil permet à l’utilisateur de tester la vitesse et la
+                latence de sa connexion Internet. Il mesure le ping, la vitesse
+                de téléchargement et d’upload, puis affiche les résultats sous
+                forme graphique simple.
+              </p>
+              <a href="test-connexion.html" class="btn tertiary"
+                >Tester ma connexion</a
+              >
+            </article>
+
+            <article class="card reveal">
+              <h3>🌐 Vérificateur de compatibilité navigateur</h3>
+              <p>
+                Cet outil indique si le navigateur de l’utilisateur supporte les
+                technologies modernes comme WebGL, WebRTC ou WebUSB. Une
+                checklist simple montre les fonctionnalités disponibles et
+                propose des recommandations si certaines technologies ne sont
+                pas supportées.
+              </p>
+              <a href="compatibilite-navigateur.html" class="btn tertiary"
+                >Vérifier mon navigateur</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION EXPERIENCE -->
+      <section id="experience" class="experience reveal">
+        <div class="container">
+          <h2>Expérience</h2>
+
+          <article class="experience-block">
+            <h3>Formateur</h3>
+            <p>
+              Développement de compétences pédagogiques, accompagnement
+              d’apprenants et vulgarisation de concepts techniques.
+            </p>
+            <p>
+              Gestion de groupe, communication et adaptation aux différents
+              profils.
+            </p>
+          </article>
+
+          <article class="experience-block">
+            <h3>Support informatique</h3>
+            <p>Support informatique (personnel / entourage)</p>
+            <p>
+              Diagnostic et résolution de problèmes sur postes Windows
+              (lenteurs, bugs, installation logiciels).
+            </p>
+            <p>Assistance utilisateur et optimisation des performances.</p>
+          </article>
+
+          <article class="experience-block">
+            <h3>Maintenance et dépannage</h3>
+            <p>Installation, configuration et mise à jour de systèmes.</p>
+            <p>Vérification du matériel, nettoyage logiciel et optimisation.</p>
+          </article>
+
+          <article class="experience-block">
+            <h3>Automatisation / scripts</h3>
+            <p>Automatisation (projets personnels)</p>
+            <p>
+              Création de scripts simples pour automatiser des tâches
+              répétitives (PowerShell).
+            </p>
+            <p>Amélioration de l’efficacité et gain de temps.</p>
+          </article>
+
+          <article class="experience-block">
+            <h3>Développement web</h3>
+            <p>Développement web (projets personnels)</p>
+            <p>Création de sites web en HTML, CSS et JavaScript.</p>
+            <p>Mise en place d’interfaces simples et responsive.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION OBJECTIF -->
+      <section id="objective" class="objective reveal">
+        <div class="container">
+          <h2>Objectif</h2>
+          <p>
+            Intégrer une équipe IT en tant que technicien support et évoluer
+            vers des projets techniques plus avancés en systèmes, réseaux et
+            développement.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION CONTACT -->
+      <section id="contact" class="contact reveal">
+        <div class="container">
+          <h2>Contact</h2>
+          <p>
+            Intéressé par un échange, une opportunité ou une collaboration ?
+          </p>
+          <div class="contact-info">
+            <p>
+              Email :
+              <a href="mailto:ribelucas@hotmail.com">ribelucas@hotmail.com</a>
+            </p>
+            <p>
+              LinkedIn :
+              <a
+                href="https://www.linkedin.com/in/lucas-ribet-5ab625341"
+                target="_blank"
+                rel="noopener noreferrer"
+                >linkedin.com/in/lucas-ribet</a
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">© 2026 Lucas Ribet - Tous droits réservés</div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

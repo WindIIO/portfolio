@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scanner de composants PC</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0d0f16;
+        color: #f4f7ff;
+      }
+      .container {
+        width: min(1024px, 94vw);
+        margin: 2rem auto;
+        padding: 1rem;
+      }
+      h1 {
+        margin-bottom: 0.5rem;
+        color: #6b63ff;
+      }
+      p.subtitle {
+        margin-bottom: 1.4rem;
+        color: #c7d0ef;
+      }
+      section {
+        margin-top: 1.6rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        background: #15182a;
+        border: 1px solid #293b7b;
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.52);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.65rem 1rem;
+        border-radius: 8px;
+        border: none;
+        background: #6b63ff;
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        margin-top: 1rem;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease,
+          filter 0.2s ease;
+      }
+      .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 14px 25px rgba(107, 99, 255, 0.55);
+        background: #4f51ec;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .loader {
+        display: none;
+        margin-top: 1rem;
+        align-items: center;
+        justify-content: center;
+      }
+      .loader.active {
+        display: flex;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        border-top-color: #6b63ff;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .scan-card {
+        position: relative;
+        border: 1px dashed #3f63ff;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .scan-overlay {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(107, 99, 255, 0.24) 50%,
+          transparent 100%
+        );
+        animation: scan-sweep 1.2s linear infinite;
+      }
+      @keyframes scan-sweep {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      pre {
+        background: #10132b;
+        padding: 1rem;
+        border-radius: 10px;
+        overflow: auto;
+        font-size: 0.9rem;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+      }
+      .stats .card {
+        background: #141b35;
+        border: 1px solid #293b7b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container reveal">
+      <h1><i class="fa-solid fa-microchip"></i> Scanner de composants PC</h1>
+      <p class="subtitle">
+        Page interactive qui détecte les composants système et permet d’exporter
+        un rapport JSON.
+      </p>
+      <button id="start" class="btn">
+        <i class="fa-solid fa-magnifying-glass"></i> Lancer l’analyse
+      </button>
+      <div id="loader" class="loader">
+        <div class="spinner"></div>
+        <p style="margin-left: 0.7rem; color: #c3c9f0">Analyse en cours...</p>
+      </div>
+      <section id="results" class="reveal" style="margin-top: 1.2rem"></section>
+      <section id="export" class="reveal" style="margin-top: 1.2rem"></section>
+    </div>
+    <script>
+      const start = document.getElementById("start");
+      const resultsSection = document.getElementById("results");
+      const exportSection = document.getElementById("export");
+
+      function getBrowserInfo() {
+        const ua = navigator.userAgent;
+        return {
+          appName: navigator.appName,
+          appVersion: navigator.appVersion,
+          userAgent: ua,
+          platform: navigator.platform,
+        };
+      }
+
+      function getDeviceInfo() {
+        return {
+          cores: navigator.hardwareConcurrency || "inconnu",
+          ram: navigator.deviceMemory
+            ? navigator.deviceMemory + " GB"
+            : "inconnu",
+          language: navigator.language,
+          online: navigator.onLine,
+        };
+      }
+
+      function createCard(title, value) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `<h3 style="margin-bottom:.5rem;color:#8fa7ff;">${title}</h3><p style="margin:0;color:#d9e0ff;">${value}</p>`;
+        return card;
+      }
+
+      const loader = document.getElementById("loader");
+      const scanCard = document.createElement("div");
+      scanCard.className = "scan-card";
+
+      start.addEventListener("click", () => {
+        resultsSection.innerHTML = "<h2>Résultats</h2>";
+        scanCard.innerHTML =
+          "<div class='scan-overlay'></div><p style='position:relative;color:#fff;margin:0;'>Analyse des composants en cours...</p>";
+        resultsSection.appendChild(scanCard);
+        loader.classList.add("active");
+        start.disabled = true;
+
+        setTimeout(() => {
+          loader.classList.remove("active");
+          scanCard.remove();
+
+          const sys = {
+            cpu: "Non accessible via navigateur",
+            gpu: "Non accessible via navigateur",
+            storage: "Non accessible via navigateur",
+          };
+          const browser = getBrowserInfo();
+          const dev = getDeviceInfo();
+          const grid = document.createElement("div");
+          grid.className = "grid";
+          grid.appendChild(createCard("CPU", sys.cpu));
+          grid.appendChild(createCard("GPU", sys.gpu));
+          grid.appendChild(createCard("RAM", dev.ram));
+          grid.appendChild(createCard("Cœurs", dev.cores));
+          grid.appendChild(createCard("Stockage", sys.storage));
+          grid.appendChild(createCard("OS", browser.platform));
+          grid.appendChild(createCard("Navigateur", browser.userAgent));
+          resultsSection.appendChild(grid);
+
+          const data = {
+            system: sys,
+            browser: browser,
+            device: dev,
+            timestamp: new Date().toISOString(),
+          };
+
+          const btnExport = document.createElement("button");
+          btnExport.className = "btn";
+          btnExport.textContent = "Exporter en JSON";
+          btnExport.addEventListener("click", () => {
+            const blob = new Blob([JSON.stringify(data, null, 2)], {
+              type: "application/json",
+            });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "scanner-pc-resultats.json";
+            link.click();
+            URL.revokeObjectURL(url);
+          });
+          exportSection.innerHTML = "";
+          exportSection.appendChild(btnExport);
+          start.disabled = false;
+        }, 1700);
+      });
+
+      function revealOnScroll() {
+        const reveals = document.querySelectorAll(".reveal");
+        const windowHeight = window.innerHeight;
+        reveals.forEach((el) => {
+          const top = el.getBoundingClientRect().top;
+          if (top < windowHeight - 80) {
+            el.classList.add("reveal-visible");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", revealOnScroll);
+      window.addEventListener("load", revealOnScroll);
+    </script>
+  </body>
+</html>
