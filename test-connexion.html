@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test de connexion Internet</title>
+    <meta name="theme-color" content="#060606" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/tools.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -12,50 +20,13 @@
       referrerpolicy="no-referrer"
     />
     <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0d0f16;
-        color: #f5f7ff;
-      }
-      .container {
-        width: min(980px, 95vw);
-        margin: 2rem auto;
-        padding: 1rem;
-      }
-      h1 {
-        color: #6b63ff;
-        margin-bottom: 0.4rem;
-      }
-      p.subtitle {
-        color: #c0c6ee;
-        margin-bottom: 1.2rem;
-      }
-      .btn {
-        padding: 0.7rem 1.1rem;
-        border: none;
-        border-radius: 8px;
-        background: #6b63ff;
-        color: #fff;
-        font-weight: 700;
-        cursor: pointer;
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.2s ease,
-          background 0.2s ease;
-      }
-      .btn:hover {
-        transform: scale(1.04);
-        box-shadow: 0 12px 18px rgba(107, 99, 255, 0.45);
-        background: #5549e4;
-      }
       .loader {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        background: #1b2146;
-        border: 1px solid #3e4ea3;
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
         padding: 0.75rem 1rem;
         margin-top: 1rem;
         animation: pulse 1.2s alternate infinite;
@@ -64,7 +35,7 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #6b63ff;
+        background: rgba(107, 99, 255, 0.95);
         animation: bounce 0.6s ease-in-out infinite alternate;
       }
       .loader .dot:nth-child(2) {
@@ -88,42 +59,36 @@
       }
       @keyframes pulse {
         to {
-          box-shadow: 0 0 24px rgba(107, 99, 255, 0.4);
+          box-shadow: 0 0 24px rgba(107, 99, 255, 0.22);
         }
-      }
-      .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-          opacity 0.6s ease,
-          transform 0.6s ease;
-      }
-      .reveal-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .box {
-        background: #131a36;
-        border: 1px solid #22346a;
-        border-radius: 12px;
-        padding: 1rem;
-        margin-top: 1rem;
       }
       .bar {
         height: 14px;
-        background: #2f68f7;
+        background: linear-gradient(
+          90deg,
+          rgba(63, 142, 252, 0.95),
+          rgba(107, 99, 255, 0.95)
+        );
         border-radius: 999px;
         transition: width 0.25s ease;
       }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
+      #status {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 0.85rem 1rem;
       }
     </style>
   </head>
   <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-title">Outils • Test de connexion</div>
+        <a class="back-link" href="index.html"
+          ><i class="fa-solid fa-arrow-left"></i><span>Retour au portfolio</span></a
+        >
+      </div>
+    </header>
     <div class="container reveal">
       <h1><i class="fa-solid fa-wifi"></i> Test de connexion Internet</h1>
       <p class="subtitle">

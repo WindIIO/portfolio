@@ -1,13 +1,17 @@
 /* style.css - Style moderne pour portfolio IT junior */
 :root {
   --bg: #060606;
-  --surface: #111;
-  --text: #eee;
-  --muted: #a4a4a4;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.68);
   --primary: #6b63ff;
+  --primary-2: #3f8efc;
   --white: #ffffff;
   --radius: 12px;
   --shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+  --ring: 0 0 0 4px rgba(107, 99, 255, 0.22);
+  --section-pad: clamp(3.2rem, 6vw, 5rem);
 }
 
 * {
@@ -20,12 +24,56 @@ body {
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   line-height: 1.6;
   color: var(--text);
-  background: var(--bg);
+  background: radial-gradient(
+      900px 600px at 65% 10%,
+      rgba(63, 142, 252, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 600px at 20% 70%,
+      rgba(107, 99, 255, 0.1),
+      transparent 50%
+    ),
+    var(--bg);
 }
 
 .container {
   width: min(1100px, 92vw);
   margin: 0 auto;
+}
+
+.container > h2 {
+  letter-spacing: -0.02em;
+}
+
+.container > p {
+  max-width: 72ch;
+}
+
+a {
+  color: var(--primary-2);
+}
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.secondary {
+  background: transparent;
+  border-color: rgba(63, 142, 252, 0.75);
+  color: var(--white);
+}
+
+.btn.secondary:hover,
+.btn.secondary:focus {
+  border-color: rgba(107, 99, 255, 0.75);
 }
 
 .navbar {
@@ -36,7 +84,7 @@ body {
   z-index: 20;
   background: rgba(6, 6, 6, 0.72);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-inner {
@@ -50,6 +98,7 @@ body {
   color: var(--white);
   font-weight: 700;
   text-decoration: none;
+  letter-spacing: -0.01em;
 }
 
 nav {
@@ -62,6 +111,7 @@ nav {
   text-decoration: none;
   font-size: 0.95rem;
   position: relative;
+  padding: 0.25rem 0;
 }
 
 .nav-link:hover,
@@ -91,6 +141,8 @@ nav {
   color: var(--white);
   background: none;
   border: none;
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
 }
 
 .hero {
@@ -99,6 +151,7 @@ nav {
   place-items: center;
   position: relative;
   background: linear-gradient(145deg, #101010, #171717 40%, #101010);
+  padding-top: 4.75rem;
 }
 
 .reveal {
@@ -139,7 +192,7 @@ nav {
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--white);
+  border: 3px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38);
   margin: 0 auto 0.75rem;
 }
@@ -193,19 +246,21 @@ nav {
 }
 
 .btn.primary {
-  background: var(--primary);
-  border-color: var(--primary);
-}
-
-.btn.secondary {
-  background: transparent;
-  border-color: #3f8efc;
-  color: var(--white);
+  background: linear-gradient(
+    180deg,
+    rgba(107, 99, 255, 0.95),
+    rgba(79, 81, 236, 0.95)
+  );
+  border-color: rgba(107, 99, 255, 0.8);
 }
 
 .btn.tertiary {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: linear-gradient(
+    180deg,
+    rgba(107, 99, 255, 0.95),
+    rgba(79, 81, 236, 0.95)
+  );
+  border-color: rgba(107, 99, 255, 0.8);
   color: var(--white);
 }
 
@@ -213,7 +268,7 @@ nav {
 .experience,
 .objective,
 .projects {
-  padding: 3.6rem 0;
+  padding: var(--section-pad) 0;
 }
 
 .skills h2,
@@ -231,8 +286,7 @@ nav {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.skill-card,
-.objective {
+.skill-card {
   background: linear-gradient(
     135deg,
     rgba(106, 99, 255, 0.18),
@@ -242,7 +296,29 @@ nav {
   border-radius: calc(var(--radius) * 1.2);
   padding: 1.5rem 1.4rem;
   box-shadow: 0 18px 32px rgba(41, 41, 74, 0.35);
-  margin-top: 1.5rem;
+  position: relative;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(107, 99, 255, 0.65);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.35);
+}
+
+.objective .container {
+  background: linear-gradient(
+    135deg,
+    rgba(106, 99, 255, 0.18),
+    rgba(63, 142, 252, 0.12)
+  );
+  border: 1px solid rgba(107, 99, 255, 0.45);
+  border-radius: calc(var(--radius) * 1.2);
+  padding: clamp(1.25rem, 3vw, 1.7rem);
+  box-shadow: 0 18px 32px rgba(41, 41, 74, 0.35);
   position: relative;
 }
 
@@ -268,8 +344,8 @@ nav {
 }
 
 .experience {
-  background: #101016;
-  border: 1px solid #222;
+  background: rgba(16, 16, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 1.4rem 1.4rem;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
@@ -328,8 +404,12 @@ nav {
 }
 
 .card {
-  background: #0f0f11;
-  border: 1px solid #222;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.03)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.4rem;
   border-radius: var(--radius);
   box-shadow: 0 12px 22px rgba(0, 0, 0, 0.35);
@@ -345,7 +425,7 @@ nav {
 .card:hover {
   transform: translateY(-6px);
   border-color: var(--primary);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.5);
 }
 
 .card.reveal-visible {
@@ -368,8 +448,8 @@ nav {
 }
 
 .contact {
-  padding: 3rem 0 2.5rem;
-  border-top: 1px solid #222;
+  padding: var(--section-pad) 0 calc(var(--section-pad) - 1rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .contact p {
@@ -406,7 +486,7 @@ nav {
 .footer {
   padding: 1.2rem 0;
   text-align: center;
-  border-top: 1px solid #222;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--muted);
   background: #050506;
 }
@@ -422,10 +502,12 @@ nav {
     top: 60px;
     right: 16px;
     flex-direction: column;
-    background: #0a0a0d;
+    background: rgba(10, 10, 13, 0.92);
     border-radius: 10px;
     padding: 0.8rem;
-    border: 1px solid #222;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow);
+    min-width: 200px;
   }
 
   .nav-open nav {
