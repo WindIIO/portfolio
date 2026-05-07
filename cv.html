@@ -27,11 +27,8 @@
       }
       .viewer {
         display: block;
-        max-width: 100%;
-        max-height: calc(100vh - 120px);
-        width: auto;
-        height: auto;
-        object-fit: contain;
+        width: 100%;
+        height: calc(100vh - 120px);
         margin: 1.2rem auto;
         border: 1px solid #222;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -54,15 +51,16 @@
     </header>
 
     <main>
-      <img
+      <embed
         class="viewer"
-        src="img/CV_Support_IT_Ribet.pdf.jpg"
+        src="img/CV_Support_IT_Ribet.pdf"
+        type="application/pdf"
         alt="CV Lucas Ribet"
       />
       <div class="fallback">
-        Si l'image ne s'affiche pas,
+        Si le PDF ne s'affiche pas,
         <a
-          href="img/CV_Support_IT_Ribet.pdf.jpg"
+          href="img/CV_Support_IT_Ribet.pdf"
           target="_blank"
           rel="noopener noreferrer"
           >cliquez ici pour ouvrir le CV</a
