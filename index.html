@@ -3,36 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lucas Ribet - Technicien Support IT</title>
+    <meta
+      name="description"
+      content="Lucas Ribet, Technicien Support Utilisateurs à Saint-Lô, spécialisé dans l'assistance Microsoft 365, le diagnostic et l'automatisation."
+    />
     <meta name="theme-color" content="#060606" />
+    <title>Lucas Ribet - Technicien Support Utilisateurs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/portfolio.css" />
   </head>
   <body>
     <header class="navbar">
       <div class="container nav-inner">
-        <a href="#" class="logo">Lucas Ribet</a>
-        <nav>
+        <a href="#hero" class="logo">Lucas Ribet</a>
+        <button
+          id="mobile-menu"
+          type="button"
+          aria-label="Ouvrir le menu de navigation"
+          aria-expanded="false"
+          aria-controls="main-navigation"
+        >
+          <span aria-hidden="true">☰</span>
+        </button>
+        <nav id="main-navigation" aria-label="Navigation principale">
           <a href="#hero" class="nav-link">Accueil</a>
+          <a href="#about" class="nav-link">À propos</a>
           <a href="#skills" class="nav-link">Compétences</a>
           <a href="#projects" class="nav-link">Projets</a>
-          <a href="#experience" class="nav-link">Expérience</a>
-          <a href="#objective" class="nav-link">Objectif</a>
+          <a href="#achievements" class="nav-link">Réalisations</a>
           <a href="#contact" class="nav-link">Contact</a>
         </nav>
-        <button id="mobile-menu" aria-label="Ouvrir menu mobile">☰</button>
       </div>
     </header>
 
     <main>
-      <!-- SECTION HERO -->
-      <section id="hero" class="hero reveal">
-        <div class="overlay"></div>
+      <!-- Présentation et actions principales -->
+      <section id="hero" class="hero">
+        <div class="overlay" aria-hidden="true"></div>
         <div class="hero-content container">
           <img
             src="img/ma_photo.png"
@@ -40,184 +52,285 @@
             class="profile-img"
           />
           <h1>Lucas Ribet</h1>
-          <p class="subtitle">
-            Technicien Support IT & Développeur en progression
-          </p>
+          <p class="subtitle">Technicien Support Utilisateurs</p>
           <p class="description">
-            Passionné par l’assistance technique, l’automatisation et la
-            résolution de problèmes, je développe mes compétences dans les
-            environnements systèmes et réseaux.
+            Spécialisé dans l'assistance Microsoft 365, le diagnostic des
+            incidents utilisateurs et le développement d'outils permettant
+            d'améliorer la productivité.
           </p>
           <div class="hero-buttons">
-            <button id="btn-projects" class="btn primary">
-              Voir mes projets
-            </button>
             <a
-              href="img/CV_Support_IT_Ribet.jpg"
+              href="https://github.com/WindIIO"
+              class="btn primary"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn secondary"
-              >Voir mon CV</a
+              >Voir mes projets</a
+            >
+            <a href="img/CV_Support_IT_Ribet.pdf" class="btn secondary" download
+              >Télécharger mon CV</a
             >
           </div>
         </div>
       </section>
 
-      <!-- SECTION COMPETENCES -->
-      <section id="skills" class="skills reveal">
+      <!-- Présentation du quotidien et du positionnement professionnel -->
+      <section id="about" class="section">
+        <div class="container">
+          <h2>À propos</h2>
+          <div class="about-copy">
+            <p><strong>Technicien Support Utilisateurs basé à Saint-Lô.</strong></p>
+            <p>
+              J'interviens quotidiennement sur les incidents Microsoft 365,
+              Outlook, Exchange Online, la gestion des accès, les problèmes de
+              messagerie et l'accompagnement des utilisateurs.
+            </p>
+            <p>
+              En parallèle, je développe des outils et automatisations
+              permettant de simplifier certaines tâches récurrentes du support
+              informatique.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compétences regroupées par domaine -->
+      <section id="skills" class="section section-alt">
         <div class="container">
           <h2>Compétences</h2>
           <div class="skill-grid">
-            <article class="skill-card">
-              <h3>Support IT</h3>
-              <p>
-                Diagnostic et résolution d’incidents niveau 1, assistance
-                utilisateur, maintenance de postes.
-              </p>
+            <article class="skill-card scroll-reveal">
+              <h3>Support Utilisateurs</h3>
+              <ul>
+                <li>Gestion des incidents</li>
+                <li>Diagnostic et résolution</li>
+                <li>Assistance à distance</li>
+                <li>Gestion des tickets</li>
+              </ul>
             </article>
-            <article class="skill-card">
-              <h3>Outils</h3>
-              <p>
-                Windows, PowerShell, GitHub, outils de diagnostic (HWiNFO,
-                CrystalDiskInfo).
-              </p>
+            <article class="skill-card scroll-reveal">
+              <h3>Microsoft 365</h3>
+              <p class="skill-group-label">Environnement Microsoft</p>
+              <ul class="skill-tags">
+                <li>Exchange Online</li>
+                <li>Suite Office</li>
+                <li>Microsoft Teams</li>
+                <li>Entra ID</li>
+                <li>Groupes Microsoft 365</li>
+                <li>Power BI</li>
+              </ul>
+              <p class="skill-group-label">Autres outils collaboratifs</p>
+              <ul class="skill-tags">
+                <li>Elium</li>
+                <li>Google Workspace (Suite Google)</li>
+              </ul>
             </article>
-            <article class="skill-card">
+            <article class="skill-card scroll-reveal">
               <h3>Développement</h3>
-              <p>
-                HTML, CSS, JavaScript (bases), création de sites web simples.
-              </p>
+              <ul>
+                <li>JavaScript</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>Extensions navigateur</li>
+                <li>Automatisation</li>
+              </ul>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- SECTION PROJETS -->
-      <section id="projects" class="projects">
+      <!-- Projets personnels conservés -->
+      <section id="projects" class="section">
         <div class="container">
-          <h2>Projets</h2>
+          <h2>Projets personnels</h2>
           <p class="section-intro">
-            Quelques réalisations pour montrer mes compétences techniques.
+            Des outils simples autour du diagnostic et de la compatibilité web.
           </p>
-          <div class="cards">
-            <article class="card reveal">
-              <h3>🔍 Scanner de composants PC</h3>
-              <p>
-                Cet outil permet à l’utilisateur de détecter rapidement les
-                composants matériels de son ordinateur : CPU, RAM, GPU,
-                stockage, navigateur et système d’exploitation. Les informations
-                sont affichées sous forme de cartes claires et l’utilisateur
-                peut exporter les données en JSON.
-              </p>
+          <div class="project-grid">
+            <article class="project-card scroll-reveal">
+              <div>
+                <h3>Scanner système navigateur</h3>
+                <p>
+                  Outil permettant d'afficher certaines informations accessibles
+                  depuis les API Web du navigateur.
+                </p>
+                <p>
+                  Il met en évidence les limites des informations disponibles
+                  côté client et permet l'export des résultats au format JSON.
+                </p>
+                <ul class="technology-list" aria-label="Technologies utilisées">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                  <li>Web APIs</li>
+                </ul>
+              </div>
               <a href="scanner-pc.html" class="btn tertiary"
-                >Voir le scanner PC</a
+                >Découvrir le scanner</a
               >
             </article>
 
-            <article class="card reveal">
-              <h3>📶 Test de connexion Internet</h3>
-              <p>
-                Cet outil permet à l’utilisateur de tester la vitesse et la
-                latence de sa connexion Internet. Il mesure le ping, la vitesse
-                de téléchargement et d’upload, puis affiche les résultats sous
-                forme graphique simple.
-              </p>
-              <a href="test-connexion.html" class="btn tertiary"
-                >Tester ma connexion</a
-              >
-            </article>
-
-            <article class="card reveal">
-              <h3>🌐 Vérificateur de compatibilité navigateur</h3>
-              <p>
-                Cet outil indique si le navigateur de l’utilisateur supporte les
-                technologies modernes comme WebGL, WebRTC ou WebUSB. Une
-                checklist simple montre les fonctionnalités disponibles et
-                propose des recommandations si certaines technologies ne sont
-                pas supportées.
-              </p>
+            <article class="project-card scroll-reveal">
+              <div>
+                <h3>Vérificateur de compatibilité navigateur</h3>
+                <p>
+                  Outil permettant de vérifier la disponibilité de différentes
+                  API Web selon le navigateur utilisé.
+                </p>
+                <p>
+                  Il peut être utilisé dans un contexte de diagnostic ou de
+                  validation d'applications web.
+                </p>
+                <ul class="technology-list" aria-label="Technologies utilisées">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                </ul>
+              </div>
               <a href="compatibilite-navigateur.html" class="btn tertiary"
-                >Vérifier mon navigateur</a
+                >Vérifier un navigateur</a
               >
             </article>
           </div>
         </div>
       </section>
 
-      <!-- SECTION EXPERIENCE -->
-      <section id="experience" class="experience reveal">
+      <!-- Réalisations décrites à partir des informations fournies -->
+      <section id="achievements" class="section section-alt">
         <div class="container">
-          <h2>Expérience</h2>
+          <h2>Réalisations personnelles</h2>
+          <div class="achievement-grid">
+            <article class="achievement-card scroll-reveal">
+              <div class="achievement-visual">
+                <img
+                  src="img/visuel-extension-ticketing.svg"
+                  alt="Illustration provisoire d'une extension navigateur pour le suivi des tickets"
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                />
+                <span class="achievement-visual-label">Visuel temporaire</span>
+              </div>
+              <div class="achievement-content">
+                <h3>Extension Chrome pour le ticketing</h3>
+                <p>
+                  Développement d'une extension Chrome facilitant l'utilisation
+                  d'un outil de ticketing.
+                </p>
+                <ul class="technology-list" aria-label="Outils concernés">
+                  <li>Chrome</li>
+                  <li>Ticketing</li>
+                </ul>
+              </div>
+            </article>
 
-          <article class="experience-block">
-            <h3>Formateur</h3>
-            <p>
-              Développement de compétences pédagogiques, accompagnement
-              d’apprenants et vulgarisation de concepts techniques.
-            </p>
-            <p>
-              Gestion de groupe, communication et adaptation aux différents
-              profils.
-            </p>
-          </article>
+            <article class="achievement-card scroll-reveal">
+              <div class="achievement-visual">
+                <img
+                  src="img/visuel-outils-internes.svg"
+                  alt="Illustration provisoire d'outils internes et d'actions automatisées"
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                />
+                <span class="achievement-visual-label">Visuel temporaire</span>
+              </div>
+              <div class="achievement-content">
+                <h3>Outils internes</h3>
+                <p>
+                  Création d'outils internes permettant d'accélérer certaines
+                  actions répétitives.
+                </p>
+                <ul class="technology-list" aria-label="Domaine">
+                  <li>Automatisation</li>
+                  <li>Support informatique</li>
+                </ul>
+              </div>
+            </article>
 
-          <article class="experience-block">
-            <h3>Support informatique</h3>
-            <p>Support informatique (personnel / entourage)</p>
-            <p>
-              Diagnostic et résolution de problèmes sur postes Windows
-              (lenteurs, bugs, installation logiciels).
-            </p>
-            <p>Assistance utilisateur et optimisation des performances.</p>
-          </article>
+            <article class="achievement-card scroll-reveal">
+              <div class="achievement-visual">
+                <img
+                  src="img/visuel-diagnostic-utilisateur.svg"
+                  alt="Illustration provisoire d'un tableau de bord de diagnostic utilisateur"
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                />
+                <span class="achievement-visual-label">Visuel temporaire</span>
+              </div>
+              <div class="achievement-content">
+                <h3>Outils de diagnostic utilisateur</h3>
+                <p>
+                  Développement de plusieurs outils JavaScript orientés
+                  diagnostic utilisateur.
+                </p>
+                <ul class="technology-list" aria-label="Technologies utilisées">
+                  <li>JavaScript</li>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>Web APIs</li>
+                </ul>
+                <div class="achievement-actions">
+                  <a
+                    class="btn github-link"
+                    href="https://github.com/WindIIO/portfolio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Voir sur GitHub</a
+                  >
+                </div>
+              </div>
+            </article>
 
-          <article class="experience-block">
-            <h3>Maintenance et dépannage</h3>
-            <p>Installation, configuration et mise à jour de systèmes.</p>
-            <p>Vérification du matériel, nettoyage logiciel et optimisation.</p>
-          </article>
-
-          <article class="experience-block">
-            <h3>Automatisation / scripts</h3>
-            <p>Automatisation (projets personnels)</p>
-            <p>
-              Création de scripts simples pour automatiser des tâches
-              répétitives (PowerShell).
-            </p>
-            <p>Amélioration de l’efficacité et gain de temps.</p>
-          </article>
-
-          <article class="experience-block">
-            <h3>Développement web</h3>
-            <p>Développement web (projets personnels)</p>
-            <p>Création de sites web en HTML, CSS et JavaScript.</p>
-            <p>Mise en place d’interfaces simples et responsive.</p>
-          </article>
+            <article class="achievement-card scroll-reveal">
+              <div class="achievement-visual">
+                <img
+                  src="img/visuel-portfolio.svg"
+                  alt="Illustration provisoire du portfolio affiché dans un navigateur"
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                />
+                <span class="achievement-visual-label">Visuel temporaire</span>
+              </div>
+              <div class="achievement-content">
+                <h3>Portfolio personnel</h3>
+                <p>
+                  Création et maintenance d'un portfolio personnel hébergé sur
+                  GitHub Pages.
+                </p>
+                <ul class="technology-list" aria-label="Technologies utilisées">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                  <li>GitHub Pages</li>
+                </ul>
+                <div class="achievement-actions">
+                  <a
+                    class="btn github-link"
+                    href="https://github.com/WindIIO/portfolio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Voir le dépôt GitHub</a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
-      <!-- SECTION OBJECTIF -->
-      <section id="objective" class="objective reveal">
-        <div class="container">
-          <h2>Objectif</h2>
-          <p>
-            Intégrer une équipe IT en tant que technicien support et évoluer
-            vers des projets techniques plus avancés en systèmes, réseaux et
-            développement.
-          </p>
-        </div>
-      </section>
-
-      <!-- SECTION CONTACT -->
-      <section id="contact" class="contact reveal">
+      <!-- Coordonnées et prise de contact -->
+      <section id="contact" class="section contact">
         <div class="container">
           <h2>Contact</h2>
           <p>
-            Intéressé par un échange, une opportunité ou une collaboration ?
+            Pour échanger autour d'une opportunité ou d'un projet, vous pouvez
+            me contacter.
           </p>
           <div class="contact-info">
             <p>
-              Email :
+              E-mail :
               <a href="mailto:ribelucas@hotmail.com">ribelucas@hotmail.com</a>
             </p>
             <p>
@@ -235,7 +348,7 @@
     </main>
 
     <footer class="footer">
-      <div class="container">© 2026 Lucas Ribet - Tous droits réservés</div>
+      <div class="container">© 2026 Lucas Ribet</div>
     </footer>
 
     <script src="js/script.js"></script>

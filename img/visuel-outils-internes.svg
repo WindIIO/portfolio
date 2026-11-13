@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="background" x1="58" y1="31" x2="906" y2="513" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172333"/>
+      <stop offset="1" stop-color="#10121D"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="124" y1="136" x2="842" y2="424" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#47B6AA"/>
+      <stop offset="1" stop-color="#6584FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="26" fill="url(#background)"/>
+  <rect x="48" y="48" width="864" height="444" rx="20" fill="#121824" stroke="#354254"/>
+  <rect x="77" y="78" width="198" height="384" rx="14" fill="#1C2635"/>
+  <circle cx="112" cy="113" r="14" fill="url(#accent)"/>
+  <rect x="139" y="105" width="104" height="13" rx="6" fill="#E6EDF6"/>
+  <g fill="#39475B">
+    <rect x="98" y="158" width="151" height="31" rx="8"/>
+    <rect x="98" y="203" width="151" height="31" rx="8"/>
+    <rect x="98" y="248" width="151" height="31" rx="8"/>
+    <rect x="98" y="293" width="151" height="31" rx="8"/>
+  </g>
+  <rect x="312" y="79" width="562" height="69" rx="13" fill="#202B3A"/>
+  <rect x="340" y="101" width="183" height="13" rx="6" fill="#EEF2F8"/>
+  <rect x="340" y="123" width="119" height="8" rx="4" fill="#8F9BAE"/>
+  <rect x="312" y="174" width="266" height="250" rx="15" fill="#1D2938"/>
+  <rect x="602" y="174" width="272" height="250" rx="15" fill="#1D2938"/>
+  <rect x="339" y="202" width="151" height="12" rx="6" fill="#DDE5F0"/>
+  <rect x="629" y="202" width="163" height="12" rx="6" fill="#DDE5F0"/>
+  <g stroke="url(#accent)" stroke-width="8" stroke-linecap="round">
+    <path d="M359 264h117"/>
+    <path d="M359 308h158"/>
+    <path d="M359 352h101"/>
+  </g>
+  <g fill="#35475A">
+    <rect x="628" y="239" width="220" height="48" rx="10"/>
+    <rect x="628" y="300" width="220" height="48" rx="10"/>
+    <rect x="628" y="361" width="220" height="35" rx="10"/>
+  </g>
+  <g fill="#78D7B3">
+    <circle cx="649" cy="263" r="7"/>
+    <circle cx="649" cy="324" r="7"/>
+  </g>
+  <g fill="#AAB5C5">
+    <rect x="668" y="257" width="127" height="10" rx="5"/>
+    <rect x="668" y="318" width="151" height="10" rx="5"/>
+    <rect x="650" y="374" width="107" height="9" rx="4"/>
+  </g>
+  <circle cx="500" cy="462" r="12" fill="#70CDB8"/>
+  <circle cx="538" cy="462" r="12" fill="#758BFF"/>
+  <circle cx="576" cy="462" r="12" fill="#D9A9FF"/>
+</svg>

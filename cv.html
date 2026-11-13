@@ -3,50 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0e" />
     <title>CV - Lucas Ribet</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
+        min-height: 100vh;
         margin: 0;
-        font-family: Arial, sans-serif;
+        padding: 1rem;
         background: #0a0a0e;
         color: #fff;
-        height: 100vh;
-        overflow: hidden;
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
       }
       .topbar {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 10;
+        display: flex;
+        width: min(100%, 1000px);
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin: 0 auto 1rem;
       }
       .topbar a {
-        color: #3f8efc;
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
+        padding: 0.55rem 0.9rem;
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        font-weight: 650;
         text-decoration: none;
-        font-weight: 700;
-        background: rgba(18, 20, 27, 0.8);
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
+      }
+      .topbar .download {
+        border-color: #756dff;
+        background: #625bf0;
+      }
+      .topbar a:focus-visible {
+        outline: 3px solid #a59fff;
+        outline-offset: 3px;
       }
       .viewer {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
+        display: block;
+        width: auto;
+        max-width: min(100%, 1000px);
+        max-height: calc(100vh - 100px);
+        margin: 0 auto;
         object-fit: contain;
-        border: none;
+      }
+      @media (max-width: 480px) {
+        body {
+          padding: 0.75rem;
+        }
+        .topbar {
+          justify-content: center;
+        }
+        .viewer {
+          width: 100%;
+          max-height: none;
+        }
       }
     </style>
   </head>
   <body>
     <header class="topbar">
       <a href="index.html">Retour au portfolio</a>
+      <a class="download" href="img/CV_Support_IT_Ribet.pdf" download
+        >Télécharger le CV PDF</a
+      >
     </header>
 
-    <img
-      class="viewer"
-      src="img/CV_Support_IT_Ribet.jpg"
-      alt="CV Lucas Ribet"
-    />
+    <main>
+      <img
+        class="viewer"
+        src="img/CV_Support_IT_Ribet.jpg"
+        alt="Aperçu du CV de Lucas Ribet. Le fichier PDF est disponible au téléchargement."
+      />
+    </main>
   </body>
 </html>

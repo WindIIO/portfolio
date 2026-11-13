@@ -1,37 +1,57 @@
-// script.js - Interactions, scroll fluide et animation de révélation
-
-// Scroll fluide sur bouton "Voir mes projets"
-const btnProjects = document.getElementById("btn-projects");
-btnProjects.addEventListener("click", () => {
-  const projectsSection = document.getElementById("projects");
-  projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-// Bouton menu mobile
 const mobileMenu = document.getElementById("mobile-menu");
+const navigation = document.getElementById("main-navigation");
 const navbar = document.querySelector(".navbar");
 
-mobileMenu.addEventListener("click", () => {
-  navbar.classList.toggle("nav-open");
-});
+document.documentElement.classList.add("js");
 
-// Reveal on scroll pour les cartes
-const reveals = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-  const windowHeight = window.innerHeight;
-
-  reveals.forEach((el) => {
-    const revealTop = el.getBoundingClientRect().top;
-    const revealPoint = 120;
-
-    if (revealTop < windowHeight - revealPoint) {
-      el.classList.add("reveal-visible");
-    } else {
-      el.classList.remove("reveal-visible");
-    }
-  });
+function setMenuOpen(isOpen) {
+  navbar.classList.toggle("nav-open", isOpen);
+  mobileMenu.setAttribute("aria-expanded", String(isOpen));
+  mobileMenu.setAttribute(
+    "aria-label",
+    isOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation",
+  );
 }
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+mobileMenu.addEventListener("click", () => {
+  const isOpen = mobileMenu.getAttribute("aria-expanded") === "true";
+  setMenuOpen(!isOpen);
+});
+
+navigation.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMenuOpen(false));
+});
+
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "Escape" &&
+    mobileMenu.getAttribute("aria-expanded") === "true"
+  ) {
+    setMenuOpen(false);
+    mobileMenu.focus();
+  }
+});
+
+const revealElements = document.querySelectorAll(".scroll-reveal");
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+
+if (revealElements.length && "IntersectionObserver" in window && !reduceMotion) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  revealElements.forEach((element) => revealObserver.observe(element));
+  document.body.classList.add("reveal-ready");
+} else {
+  revealElements.forEach((element) => element.classList.add("is-visible"));
+}

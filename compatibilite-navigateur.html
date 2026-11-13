@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Compatibilité navigateur</title>
     <meta name="theme-color" content="#060606" />
+    <title>Vérificateur de compatibilité navigateur</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,117 +12,88 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/tools.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      integrity="sha512-..."
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <style>
-      .card {
-        margin-bottom: 0.8rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .feature-icon {
-        color: rgba(107, 99, 255, 0.95);
-      }
-      #features p {
-        max-width: 80ch;
-      }
-    </style>
   </head>
   <body>
     <header class="topbar">
       <div class="topbar-inner">
-        <div class="topbar-title">Outils • Compatibilité navigateur</div>
-        <a class="back-link" href="index.html"
-          ><i class="fa-solid fa-arrow-left"></i><span>Retour au portfolio</span></a
-        >
+        <div class="topbar-title">Projets • Compatibilité navigateur</div>
+        <a class="back-link" href="index.html">Retour au portfolio</a>
       </div>
     </header>
-    <div class="container reveal">
-      <h1>
-        <i class="fa-solid fa-globe"></i> Vérificateur de compatibilité
-        navigateur
-      </h1>
+
+    <main class="container">
+      <h1>Vérificateur de compatibilité navigateur</h1>
       <p class="subtitle">
-        Test des technologies WebGL, WebRTC et WebUSB, avec recommandations si
-        manques.
+        Vérifie la disponibilité de différentes API Web dans le navigateur.
+        Cette vérification indique la présence des API, pas le fonctionnement
+        d'un appareil ou d'un service externe.
       </p>
-      <button id="check" class="btn">
-        <i class="fa-solid fa-check-circle"></i> Vérifier mon navigateur
+      <button id="check" class="btn" type="button">
+        Vérifier mon navigateur
       </button>
-      <div id="features" class="reveal" style="margin-top: 1rem"></div>
-    </div>
+      <section id="features" aria-live="polite" style="margin-top: 1rem"></section>
+    </main>
+
     <script>
       const check = document.getElementById("check");
       const features = document.getElementById("features");
 
-      function testFeature(label, condition, recommendation) {
-        const div = document.createElement("div");
-        div.className = "card";
-        const icon = condition ? "fa-circle-check" : "fa-circle-xmark";
-        const color = condition ? "status-success" : "status-fail";
-        div.innerHTML = `<span style="display:flex;align-items:center;gap:.6rem;"><i class="fa-solid ${icon} feature-icon"></i>${label}</span><span class='${color}'>${condition ? "Supporté" : "Non supporté"}</span>`;
-        features.appendChild(div);
-        if (!condition) {
+      function addFeature(label, available, recommendation) {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const name = document.createElement("h2");
+        name.textContent = label;
+
+        const status = document.createElement("p");
+        status.className = available ? "status-success" : "status-fail";
+        status.textContent = available ? "API disponible" : "API indisponible";
+        card.append(name, status);
+        features.appendChild(card);
+
+        if (!available) {
           const tip = document.createElement("p");
-          tip.style.color = "#c9d5ff";
-          tip.style.margin = "0 .2rem .7rem";
+          tip.className = "subtitle";
           tip.textContent = recommendation;
           features.appendChild(tip);
         }
       }
 
       check.addEventListener("click", () => {
-        features.innerHTML = "";
-        const webgl = (() => {
-          try {
-            const c = document.createElement("canvas");
-            return (
-              !!window.WebGLRenderingContext &&
-              (c.getContext("webgl") || c.getContext("experimental-webgl"))
-            );
-          } catch (e) {
-            return false;
-          }
-        })();
-        const webrtc = !!(
-          navigator.mediaDevices && navigator.mediaDevices.getUserMedia
+        features.replaceChildren();
+
+        let webglAvailable = false;
+        try {
+          const canvas = document.createElement("canvas");
+          webglAvailable =
+            !!window.WebGLRenderingContext &&
+            !!(canvas.getContext("webgl") ||
+              canvas.getContext("experimental-webgl"));
+        } catch {
+          webglAvailable = false;
+        }
+
+        const webrtcAvailable = Boolean(
+          navigator.mediaDevices && navigator.mediaDevices.getUserMedia,
         );
-        const webusb = "usb" in navigator;
-        testFeature(
+        const webusbAvailable = "usb" in navigator;
+
+        addFeature(
           "WebGL",
-          webgl,
-          "Mettez à jour votre navigateur ou activez WebGL dans les paramètres GPU.",
+          webglAvailable,
+          "Vérifiez la prise en charge WebGL du navigateur et l'accélération graphique.",
         );
-        testFeature(
+        addFeature(
           "WebRTC",
-          webrtc,
-          "Utilisez Chrome/Edge/Safari récents pour supporter la webcam/micro.",
+          webrtcAvailable,
+          "L'API de capture audio/vidéo n'est pas disponible dans ce contexte.",
         );
-        testFeature(
+        addFeature(
           "WebUSB",
-          webusb,
-          "WebUSB est encore limité : utilisez Chrome/Edge et activez les flags si nécessaire.",
+          webusbAvailable,
+          "WebUSB n'est pas disponible dans ce navigateur ou ce contexte.",
         );
       });
-
-      function revealOnScroll() {
-        const reveals = document.querySelectorAll(".reveal");
-        const windowHeight = window.innerHeight;
-        reveals.forEach((el) => {
-          const top = el.getBoundingClientRect().top;
-          if (top < windowHeight - 80) {
-            el.classList.add("reveal-visible");
-          }
-        });
-      }
-      window.addEventListener("load", revealOnScroll);
-      window.addEventListener("scroll", revealOnScroll);
     </script>
   </body>
 </html>
