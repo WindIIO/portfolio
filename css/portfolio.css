@@ -232,16 +232,50 @@ button:focus-visible {
 }
 
 .about-copy {
-  max-width: 78ch;
+  display: grid;
+  max-width: 960px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(117, 109, 255, 0.16), transparent 55%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
 }
 
-.about-copy p {
-  margin-top: 0.85rem;
+.about-lead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+.about-eyebrow {
+  margin-bottom: 0.65rem;
+  color: #a59fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-lead p {
+  color: var(--white);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.4;
+}
+
+.about-details {
+  display: grid;
+  align-content: center;
+  gap: 0.85rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+.about-details p {
   color: var(--muted);
-}
-
-.about-copy strong {
-  color: var(--text);
 }
 
 .skill-grid,
@@ -300,6 +334,18 @@ button:focus-visible {
   background: rgba(117, 109, 255, 0.09);
   color: #d3d0ff;
   font-size: 0.86rem;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.skill-tags li:hover {
+  transform: translateY(-2px);
+  border-color: rgba(117, 109, 255, 0.75);
+  background: rgba(117, 109, 255, 0.2);
+  box-shadow: 0 5px 14px rgba(117, 109, 255, 0.2);
 }
 
 .section-intro {
@@ -373,6 +419,21 @@ body.reveal-ready .scroll-reveal {
   transition:
     opacity 480ms ease,
     transform 480ms ease;
+}
+
+body.reveal-ready .skill-card:nth-child(2),
+body.reveal-ready .project-card:nth-child(2),
+body.reveal-ready .achievement-card:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+body.reveal-ready .skill-card:nth-child(3),
+body.reveal-ready .achievement-card:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+body.reveal-ready .achievement-card:nth-child(4) {
+  transition-delay: 270ms;
 }
 
 body.reveal-ready .scroll-reveal.is-visible {
@@ -567,6 +628,15 @@ body.reveal-ready .scroll-reveal.is-visible {
   .project-grid,
   .achievement-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .about-lead {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .skill-card,

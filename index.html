@@ -45,7 +45,7 @@
       <!-- Présentation et actions principales -->
       <section id="hero" class="hero">
         <div class="overlay" aria-hidden="true"></div>
-        <div class="hero-content container">
+        <div class="hero-content container scroll-reveal">
           <img
             src="img/ma_photo.png"
             alt="Photo de Lucas Ribet"
@@ -76,19 +76,24 @@
       <!-- Présentation du quotidien et du positionnement professionnel -->
       <section id="about" class="section">
         <div class="container">
-          <h2>À propos</h2>
-          <div class="about-copy">
-            <p><strong>Technicien Support Utilisateurs basé à Saint-Lô.</strong></p>
-            <p>
-              J'interviens quotidiennement sur les incidents Microsoft 365,
-              Outlook, Exchange Online, la gestion des accès, les problèmes de
-              messagerie et l'accompagnement des utilisateurs.
-            </p>
-            <p>
-              En parallèle, je développe des outils et automatisations
-              permettant de simplifier certaines tâches récurrentes du support
-              informatique.
-            </p>
+          <h2 class="scroll-reveal">À propos</h2>
+          <div class="about-copy scroll-reveal">
+            <div class="about-lead">
+              <span class="about-eyebrow">Mon quotidien</span>
+              <p><strong>Technicien Support Utilisateurs.</strong></p>
+            </div>
+            <div class="about-details">
+              <p>
+                J'interviens quotidiennement sur les incidents Microsoft 365,
+                Outlook, Exchange Online, la gestion des accès, les problèmes de
+                messagerie et l'accompagnement des utilisateurs.
+              </p>
+              <p>
+                En parallèle, je développe des outils et automatisations
+                permettant de simplifier certaines tâches récurrentes du support
+                informatique.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -96,11 +101,11 @@
       <!-- Compétences regroupées par domaine -->
       <section id="skills" class="section section-alt">
         <div class="container">
-          <h2>Compétences</h2>
+          <h2 class="scroll-reveal">Compétences</h2>
           <div class="skill-grid">
             <article class="skill-card scroll-reveal">
               <h3>Support Utilisateurs</h3>
-              <ul>
+              <ul class="skill-tags">
                 <li>Gestion des incidents</li>
                 <li>Diagnostic et résolution</li>
                 <li>Assistance à distance</li>
@@ -118,7 +123,6 @@
                 <li>Groupes Microsoft 365</li>
                 <li>Power BI</li>
               </ul>
-              <p class="skill-group-label">Autres outils collaboratifs</p>
               <ul class="skill-tags">
                 <li>Elium</li>
                 <li>Google Workspace (Suite Google)</li>
@@ -126,7 +130,7 @@
             </article>
             <article class="skill-card scroll-reveal">
               <h3>Développement</h3>
-              <ul>
+              <ul class="skill-tags">
                 <li>JavaScript</li>
                 <li>HTML</li>
                 <li>CSS</li>
@@ -141,8 +145,8 @@
       <!-- Projets personnels conservés -->
       <section id="projects" class="section">
         <div class="container">
-          <h2>Projets personnels</h2>
-          <p class="section-intro">
+          <h2 class="scroll-reveal">Projets personnels</h2>
+          <p class="section-intro scroll-reveal">
             Des outils simples autour du diagnostic et de la compatibilité web.
           </p>
           <div class="project-grid">
@@ -197,18 +201,17 @@
       <!-- Réalisations décrites à partir des informations fournies -->
       <section id="achievements" class="section section-alt">
         <div class="container">
-          <h2>Réalisations personnelles</h2>
+          <h2 class="scroll-reveal">Réalisations personnelles</h2>
           <div class="achievement-grid">
             <article class="achievement-card scroll-reveal">
               <div class="achievement-visual">
                 <img
-                  src="img/visuel-extension-ticketing.svg"
-                  alt="Illustration provisoire d'une extension navigateur pour le suivi des tickets"
+                  src="img/visuel-extension-ticketing.png"
+                  alt="Capture d'écran de l'outil EasyVista Templates pour le suivi des tickets"
                   width="960"
                   height="540"
                   loading="lazy"
                 />
-                <span class="achievement-visual-label">Visuel temporaire</span>
               </div>
               <div class="achievement-content">
                 <h3>Extension Chrome pour le ticketing</h3>
@@ -226,13 +229,12 @@
             <article class="achievement-card scroll-reveal">
               <div class="achievement-visual">
                 <img
-                  src="img/visuel-outils-internes.svg"
-                  alt="Illustration provisoire d'outils internes et d'actions automatisées"
+                  src="img/visuel-outils-internes.png"
+                  alt="Capture d'écran de l'outil QuickRing de raccourcis texte"
                   width="960"
                   height="540"
                   loading="lazy"
                 />
-                <span class="achievement-visual-label">Visuel temporaire</span>
               </div>
               <div class="achievement-content">
                 <h3>Outils internes</h3>
@@ -250,13 +252,12 @@
             <article class="achievement-card scroll-reveal">
               <div class="achievement-visual">
                 <img
-                  src="img/visuel-diagnostic-utilisateur.svg"
-                  alt="Illustration provisoire d'un tableau de bord de diagnostic utilisateur"
+                  src="img/visuel-diagnostic-utilisateur.png"
+                  alt="Illustration d'un tableau de bord de diagnostic présentant l'état du poste, du réseau et du navigateur"
                   width="960"
                   height="540"
                   loading="lazy"
                 />
-                <span class="achievement-visual-label">Visuel temporaire</span>
               </div>
               <div class="achievement-content">
                 <h3>Outils de diagnostic utilisateur</h3>
@@ -285,13 +286,12 @@
             <article class="achievement-card scroll-reveal">
               <div class="achievement-visual">
                 <img
-                  src="img/visuel-portfolio.svg"
-                  alt="Illustration provisoire du portfolio affiché dans un navigateur"
+                  src="img/visuel-portfolio.png"
+                  alt="Capture d'écran du portfolio de Lucas Ribet affiché dans un navigateur"
                   width="960"
                   height="540"
                   loading="lazy"
                 />
-                <span class="achievement-visual-label">Visuel temporaire</span>
               </div>
               <div class="achievement-content">
                 <h3>Portfolio personnel</h3>
@@ -323,12 +323,12 @@
       <!-- Coordonnées et prise de contact -->
       <section id="contact" class="section contact">
         <div class="container">
-          <h2>Contact</h2>
-          <p>
+          <h2 class="scroll-reveal">Contact</h2>
+          <p class="scroll-reveal">
             Pour échanger autour d'une opportunité ou d'un projet, vous pouvez
             me contacter.
           </p>
-          <div class="contact-info">
+          <div class="contact-info scroll-reveal">
             <p>
               E-mail :
               <a href="mailto:ribelucas@hotmail.com">ribelucas@hotmail.com</a>
@@ -347,7 +347,7 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer scroll-reveal">
       <div class="container">© 2026 Lucas Ribet</div>
     </footer>
 
