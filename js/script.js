@@ -13,6 +13,19 @@ const introPhrases = [
   "Partisan du moindre effort... intelligent.",
   "Je préfère passer 2 heures à automatiser une tâche que 5 minutes à la refaire chaque jour.",
   "Si un processus est pénible, il mérite probablement un script.",
+  "Je suis peut-être développeur par passion, mais surtout par flemme.",
+  "Si une tâche est répétitive, elle a probablement déjà été automatisée.",
+  "Transformer 30 clics en 1 clic est une philosophie de vie.",
+  "Mon objectif : travailler intelligemment avant de travailler longtemps.",
+  "L'automatisation est mon sport favori.",
+  "Pourquoi faire simple quand on peut automatiser ?",
+  "Parce que cliquer 300 fois n'est pas une compétence.",
+  "Je collectionne les gains de temps.",
+  "J'aime comprendre comment les choses fonctionnent... puis les améliorer.",
+  "Construire, automatiser, améliorer... puis recommencer.",
+  "Bienvenue dans mon laboratoire d'idées.",
+  "Des projets, des scripts et beaucoup de Redbull.",
+  "Quand une idée me plaît, elle finit souvent sur GitHub.",
 ];
 const introPhraseStorageKey = "portfolio-intro-phrase-index";
 let previousPhraseIndex = -1;
