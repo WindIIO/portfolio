@@ -259,124 +259,241 @@
         </div>
       </section>
 
-      <!-- Réalisations décrites à partir des informations fournies -->
+      <!-- Parcours immersif des réalisations personnelles -->
       <section id="achievements" class="section section-alt">
         <div class="container">
           <h2 class="scroll-reveal">Réalisations personnelles</h2>
-          <div class="achievement-grid">
-            <article class="achievement-card scroll-reveal">
-              <div class="achievement-visual">
-                <img
-                  src="img/visuel-extension-ticketing.png"
-                  alt="Capture d'écran de l'outil EasyVista Templates pour le suivi des tickets"
-                  width="960"
-                  height="540"
-                  loading="lazy"
-                />
+          <p class="section-intro scroll-reveal">
+            Faites défiler pour voyager d'une station numérique à la suivante.
+          </p>
+          <div class="project-journey" data-project-journey>
+            <div
+              class="project-journey__stage"
+              role="region"
+              aria-label="Voyage interactif parmi les réalisations"
+            >
+              <div class="project-journey__field" aria-hidden="true">
+                <div class="project-journey__orbit"></div>
               </div>
-              <div class="achievement-content">
-                <h3>Extension Chrome pour le ticketing</h3>
-                <p>
-                  Développement d'une extension Chrome facilitant l'utilisation
-                  d'un outil de ticketing.
-                </p>
-                <ul class="technology-list" aria-label="Outils concernés">
-                  <li>Chrome</li>
-                  <li>Ticketing</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="achievement-card scroll-reveal">
-              <div class="achievement-visual">
-                <img
-                  src="img/visuel-outils-internes.png"
-                  alt="Capture d'écran de l'outil QuickRing de raccourcis texte"
-                  width="960"
-                  height="540"
-                  loading="lazy"
-                />
-              </div>
-              <div class="achievement-content">
-                <h3>Outils internes</h3>
-                <p>
-                  Création d'outils internes permettant d'accélérer certaines
-                  actions répétitives.
-                </p>
-                <ul class="technology-list" aria-label="Domaine">
-                  <li>Automatisation</li>
-                  <li>Support informatique</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="achievement-card scroll-reveal">
-              <div class="achievement-visual">
-                <img
-                  src="img/visuel-diagnostic-utilisateur.png"
-                  alt="Illustration d'un tableau de bord de diagnostic présentant l'état du poste, du réseau et du navigateur"
-                  width="960"
-                  height="540"
-                  loading="lazy"
-                />
-              </div>
-              <div class="achievement-content">
-                <h3>Outils de diagnostic utilisateur</h3>
-                <p>
-                  Développement de plusieurs outils JavaScript orientés
-                  diagnostic utilisateur.
-                </p>
-                <ul class="technology-list" aria-label="Technologies utilisées">
-                  <li>JavaScript</li>
-                  <li>HTML</li>
-                  <li>CSS</li>
-                  <li>Web APIs</li>
-                </ul>
-                <div class="achievement-actions">
-                  <a
-                    class="btn github-link"
-                    href="https://github.com/WindIIO/portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Voir sur GitHub</a
+              <div class="project-journey__transit" aria-hidden="true"></div>
+              <p
+                class="project-journey__status"
+                data-project-status
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                Projet 1 sur 4
+              </p>
+              <div class="project-journey__cards">
+                <article
+                  class="achievement-card project-journey__card"
+                  data-project-category="Extension · Support IT"
+                >
+                  <div class="project-journey__core">
+                    <div class="achievement-visual">
+                      <img
+                        src="img/visuel-extension-ticketing.png"
+                        alt="Capture d'écran de l'outil EasyVista Templates pour le suivi des tickets"
+                        width="960"
+                        height="540"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="achievement-content">
+                      <h3>Extension Chrome pour le ticketing</h3>
+                      <p>
+                        Développement d'une extension Chrome facilitant
+                        l'utilisation d'un outil de ticketing.
+                      </p>
+                    </div>
+                  </div>
+                  <ul
+                    class="project-satellites"
+                    aria-label="Technologies et informations du projet"
                   >
-                </div>
-              </div>
-            </article>
+                    <li class="project-satellite project-satellite--northwest">
+                      <span>Extension</span>
+                    </li>
+                    <li class="project-satellite project-satellite--northeast">
+                      <span>Chrome</span>
+                    </li>
+                    <li class="project-satellite project-satellite--west">
+                      <span>Ticketing</span>
+                    </li>
+                    <li class="project-satellite project-satellite--east">
+                      <span>Support IT</span>
+                    </li>
+                  </ul>
+                </article>
 
-            <article class="achievement-card scroll-reveal">
-              <div class="achievement-visual">
-                <img
-                  src="img/visuel-portfolio.png"
-                  alt="Capture d'écran du portfolio de Lucas Ribet affiché dans un navigateur"
-                  width="960"
-                  height="540"
-                  loading="lazy"
-                />
-              </div>
-              <div class="achievement-content">
-                <h3>Portfolio personnel</h3>
-                <p>
-                  Création et maintenance d'un portfolio personnel hébergé sur
-                  GitHub Pages.
-                </p>
-                <ul class="technology-list" aria-label="Technologies utilisées">
-                  <li>HTML</li>
-                  <li>CSS</li>
-                  <li>JavaScript</li>
-                  <li>GitHub Pages</li>
-                </ul>
-                <div class="achievement-actions">
-                  <a
-                    class="btn github-link"
-                    href="https://github.com/WindIIO/portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Voir le dépôt GitHub</a
+                <article
+                  class="achievement-card project-journey__card"
+                  data-project-category="Automatisation · Outils internes"
+                >
+                  <div class="project-journey__core">
+                    <div class="achievement-visual">
+                      <img
+                        src="img/visuel-outils-internes.png"
+                        alt="Capture d'écran de l'outil QuickRing de raccourcis texte"
+                        width="960"
+                        height="540"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="achievement-content">
+                      <h3>Outils internes</h3>
+                      <p>
+                        Création d'outils internes permettant d'accélérer
+                        certaines actions répétitives.
+                      </p>
+                    </div>
+                  </div>
+                  <ul
+                    class="project-satellites"
+                    aria-label="Technologies et informations du projet"
                   >
-                </div>
+                    <li class="project-satellite project-satellite--northwest">
+                      <span>Automatisation</span>
+                    </li>
+                    <li class="project-satellite project-satellite--northeast">
+                      <span>QuickRing</span>
+                    </li>
+                    <li class="project-satellite project-satellite--west">
+                      <span>Outils internes</span>
+                    </li>
+                    <li class="project-satellite project-satellite--east">
+                      <span>Support informatique</span>
+                    </li>
+                    <li class="project-satellite project-satellite--southwest">
+                      <span>Raccourcis texte</span>
+                    </li>
+                  </ul>
+                </article>
+
+                <article
+                  class="achievement-card project-journey__card"
+                  data-project-category="Diagnostic · Outils utilisateur"
+                >
+                  <div class="project-journey__core">
+                    <div class="achievement-visual">
+                      <img
+                        src="img/visuel-diagnostic-utilisateur.png"
+                        alt="Illustration d'un tableau de bord de diagnostic présentant l'état du poste, du réseau et du navigateur"
+                        width="960"
+                        height="540"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="achievement-content">
+                      <h3>Outils de diagnostic utilisateur</h3>
+                      <p>
+                        Développement de plusieurs outils JavaScript orientés
+                        diagnostic utilisateur.
+                      </p>
+                      <div class="achievement-actions">
+                        <a
+                          class="btn github-link"
+                          href="https://github.com/WindIIO/portfolio"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <ul
+                    class="project-satellites"
+                    aria-label="Technologies et liens du projet"
+                  >
+                    <li class="project-satellite project-satellite--northwest">
+                      <span>Diagnostic</span>
+                    </li>
+                    <li class="project-satellite project-satellite--northeast">
+                      <span>JavaScript</span>
+                    </li>
+                    <li class="project-satellite project-satellite--west">
+                      <span>HTML · CSS</span>
+                    </li>
+                    <li class="project-satellite project-satellite--east">
+                      <span>Web APIs</span>
+                    </li>
+                    <li class="project-satellite project-satellite--north">
+                      <a
+                        href="https://github.com/WindIIO/portfolio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >GitHub</a
+                      >
+                    </li>
+                  </ul>
+                </article>
+
+                <article
+                  class="achievement-card project-journey__card"
+                  data-project-category="Portfolio · GitHub Pages"
+                >
+                  <div class="project-journey__core">
+                    <div class="achievement-visual">
+                      <img
+                        src="img/visuel-portfolio.png"
+                        alt="Capture d'écran du portfolio de Lucas Ribet affiché dans un navigateur"
+                        width="960"
+                        height="540"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="achievement-content">
+                      <h3>Portfolio personnel</h3>
+                      <p>
+                        Création et maintenance d'un portfolio personnel
+                        hébergé sur GitHub Pages.
+                      </p>
+                      <div class="achievement-actions">
+                        <a
+                          class="btn github-link"
+                          href="https://github.com/WindIIO/portfolio"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <ul
+                    class="project-satellites"
+                    aria-label="Technologies et liens du projet"
+                  >
+                    <li class="project-satellite project-satellite--northwest">
+                      <span>Portfolio</span>
+                    </li>
+                    <li class="project-satellite project-satellite--northeast">
+                      <span>HTML · CSS</span>
+                    </li>
+                    <li class="project-satellite project-satellite--west">
+                      <span>JavaScript</span>
+                    </li>
+                    <li class="project-satellite project-satellite--east">
+                      <span>GitHub Pages</span>
+                    </li>
+                    <li class="project-satellite project-satellite--southeast">
+                      <a
+                        href="https://github.com/WindIIO/portfolio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >GitHub</a
+                      >
+                    </li>
+                  </ul>
+                </article>
               </div>
-            </article>
+            </div>
+            <div class="project-journey__scroll-space" aria-hidden="true"></div>
+            <div class="project-journey__track" aria-hidden="true">
+              <span class="project-journey__step"></span>
+              <span class="project-journey__step"></span>
+              <span class="project-journey__step"></span>
+              <span class="project-journey__step"></span>
+            </div>
           </div>
         </div>
       </section>

@@ -227,6 +227,279 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+const projectJourney = document.querySelector("[data-project-journey]");
+const projectReduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+
+if (projectJourney && !projectReduceMotion) {
+  const projectStage = projectJourney.querySelector(
+    ".project-journey__stage",
+  );
+  const projectCards = Array.from(
+    projectJourney.querySelectorAll(".project-journey__card"),
+  );
+  const projectSteps = Array.from(
+    projectJourney.querySelectorAll(".project-journey__step"),
+  );
+  const projectStatus = projectJourney.querySelector(
+    "[data-project-status]",
+  );
+
+  if (
+    projectStage &&
+    projectStatus &&
+    projectCards.length > 0 &&
+    projectSteps.length === projectCards.length
+  ) {
+    projectJourney.style.setProperty(
+      "--project-count",
+      String(projectCards.length),
+    );
+    projectJourney.classList.add("is-spatial");
+
+    let activeProjectIndex = -1;
+    let scrollFrame = 0;
+
+    function activateProject(index) {
+      if (index === activeProjectIndex) {
+        return;
+      }
+
+      activeProjectIndex = index;
+      projectCards.forEach((card, cardIndex) => {
+        const isActive = cardIndex === index;
+        card.classList.toggle("is-active", isActive);
+        card.setAttribute("aria-hidden", String(!isActive));
+        card.setAttribute("aria-current", String(isActive));
+        card.inert = !isActive;
+      });
+
+      const activeCard = projectCards[index];
+      projectStatus.textContent =
+        `Projet ${index + 1} sur ${projectCards.length} : ${activeCard.dataset.projectCategory}`;
+    }
+
+    function updateProjectFromScroll() {
+      scrollFrame = 0;
+      const firstStep = projectSteps[0].getBoundingClientRect();
+      const stepHeight = firstStep.height;
+      if (stepHeight === 0) {
+        return;
+      }
+
+      const progress =
+        (window.innerHeight / 2 - firstStep.top) / stepHeight;
+      const journeyProgress = Math.max(
+        0,
+        Math.min(projectCards.length - 1, progress - 0.5),
+      );
+      const hasTransitions = projectCards.length > 1;
+      const transitionStart = hasTransitions
+        ? Math.min(projectCards.length - 2, Math.floor(journeyProgress))
+        : 0;
+      const transitionProgress = journeyProgress - transitionStart;
+      const transitOpacity =
+        hasTransitions
+          ? Math.pow(Math.sin(Math.PI * transitionProgress), 1.25)
+          : 0;
+      const activeIndex = Math.max(
+        0,
+        Math.min(
+          projectCards.length - 1,
+          Math.floor(progress + 0.001),
+        ),
+      );
+
+      projectStage.style.setProperty(
+        "--transit-progress",
+        String(transitionProgress),
+      );
+      projectStage.style.setProperty(
+        "--transit-opacity",
+        String(transitOpacity),
+      );
+      projectStage.style.setProperty(
+        "--transit-scale",
+        String(1.3 + transitOpacity * 0.55),
+      );
+      projectStage.style.setProperty(
+        "--transit-animation-state",
+        transitOpacity > 0.04 ? "running" : "paused",
+      );
+      projectStage.classList.toggle("is-transitioning", transitOpacity > 0.04);
+
+      projectCards.forEach((card, index) => {
+        const distance = index + 0.5 - progress;
+        const absoluteDistance = Math.abs(distance);
+        const isOutgoing = distance < 0;
+        const depth = Math.min(
+          2200,
+          Math.pow(absoluteDistance, 1.32) * 920 + (isOutgoing ? 180 : 0),
+        );
+        const scale = Math.max(
+          0.08,
+          1 - absoluteDistance * 0.32 - (isOutgoing ? 0.08 : 0),
+        );
+        const opacity = Math.max(
+          0,
+          1 - absoluteDistance * (isOutgoing ? 1.1 : 0.68),
+        );
+        const detailOpacity = Math.max(
+          0,
+          Math.min(
+            1,
+            1 -
+              Math.max(0, absoluteDistance - 0.12) /
+                (isOutgoing ? 0.3 : 0.48),
+          ),
+        );
+        const satelliteOpacity = Math.max(
+          0,
+          1 - Math.max(0, absoluteDistance - 0.12) / 0.28,
+        );
+        const satelliteScale = Math.max(
+          0.72,
+          1 - Math.max(0, absoluteDistance - 0.12) * 0.35,
+        );
+        const silhouetteOpacity =
+          distance > 0.08
+            ? Math.min(
+                1,
+                Math.max(0, (distance - 0.08) / 0.32),
+                Math.max(0, (1.35 - distance) / 0.35),
+              )
+            : 0;
+        const rotation = Math.max(-28, Math.min(28, distance * -11));
+        const verticalOffset = Math.max(
+          -110,
+          Math.min(110, distance * 48),
+        );
+
+        card.style.setProperty("--station-z", `${-depth}px`);
+        card.style.setProperty("--station-scale", String(scale));
+        card.style.setProperty("--station-opacity", String(opacity));
+        card.style.setProperty(
+          "--station-detail-opacity",
+          String(detailOpacity),
+        );
+        card.style.setProperty(
+          "--station-detail-visibility",
+          detailOpacity > 0.01 ? "visible" : "hidden",
+        );
+        card.style.setProperty(
+          "--station-satellite-opacity",
+          String(satelliteOpacity),
+        );
+        card.style.setProperty(
+          "--station-satellite-visibility",
+          satelliteOpacity > 0.01 ? "visible" : "hidden",
+        );
+        card.style.setProperty(
+          "--station-satellite-scale",
+          String(satelliteScale),
+        );
+        card.style.setProperty(
+          "--station-silhouette-opacity",
+          String(silhouetteOpacity),
+        );
+        card.style.setProperty(
+          "--station-rotation",
+          `${rotation}deg`,
+        );
+        card.style.setProperty("--station-y", `${verticalOffset}px`);
+        card.style.setProperty(
+          "--station-blur",
+          `${Math.min(8, absoluteDistance * 2.2)}px`,
+        );
+        card.style.zIndex = String(
+          100 - Math.round(absoluteDistance * 10),
+        );
+        card.style.setProperty(
+          "--station-visibility",
+          absoluteDistance > 2.5 ? "hidden" : "visible",
+        );
+      });
+
+      projectStage.style.setProperty(
+        "--camera-drift",
+        `${-progress * 36}px`,
+      );
+      activateProject(activeIndex);
+      projectCards.forEach((card, index) => {
+        card.inert = transitOpacity > 0.04 || index !== activeIndex;
+      });
+    }
+
+    function scheduleProjectUpdate() {
+      if (scrollFrame) {
+        return;
+      }
+
+      scrollFrame = document.hidden
+        ? window.setTimeout(updateProjectFromScroll, 16)
+        : window.requestAnimationFrame(updateProjectFromScroll);
+    }
+
+    window.addEventListener("scroll", scheduleProjectUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", scheduleProjectUpdate);
+    updateProjectFromScroll();
+
+    projectStage.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") {
+        return;
+      }
+
+      const bounds = projectStage.getBoundingClientRect();
+      if (bounds.width === 0 || bounds.height === 0) {
+        return;
+      }
+
+      const normalizedX = Math.max(
+        -1,
+        Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2),
+      );
+      const normalizedY = Math.max(
+        -1,
+        Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2),
+      );
+
+      projectStage.style.setProperty("--field-x", `${normalizedX * -9}px`);
+      projectStage.style.setProperty("--field-y", `${normalizedY * -9}px`);
+
+      projectCards.forEach((card) => {
+        card.querySelectorAll(".project-satellite").forEach(
+          (satellite, satelliteIndex) => {
+            const depth = 3 + (satelliteIndex % 3) * 1.5;
+            satellite.style.setProperty(
+              "--satellite-parallax-x",
+              `${normalizedX * depth}px`,
+            );
+            satellite.style.setProperty(
+              "--satellite-parallax-y",
+              `${normalizedY * depth}px`,
+            );
+          },
+        );
+      });
+    });
+
+    projectStage.addEventListener("pointerleave", () => {
+      projectStage.style.setProperty("--field-x", "0px");
+      projectStage.style.setProperty("--field-y", "0px");
+
+      projectCards.forEach((card) => {
+        card.querySelectorAll(".project-satellite").forEach((satellite) => {
+          satellite.style.setProperty("--satellite-parallax-x", "0px");
+          satellite.style.setProperty("--satellite-parallax-y", "0px");
+        });
+      });
+    });
+  }
+}
+
 const revealElements = document.querySelectorAll(".scroll-reveal");
 const reduceMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",

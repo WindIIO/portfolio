@@ -537,16 +537,16 @@ body.reveal-ready .scroll-reveal {
 
 body.reveal-ready .skill-card:nth-child(2),
 body.reveal-ready .project-card:nth-child(2),
-body.reveal-ready .achievement-card:nth-child(2) {
+body.reveal-ready .achievement-card.scroll-reveal:nth-child(2) {
   transition-delay: 90ms;
 }
 
 body.reveal-ready .skill-card:nth-child(3),
-body.reveal-ready .achievement-card:nth-child(3) {
+body.reveal-ready .achievement-card.scroll-reveal:nth-child(3) {
   transition-delay: 180ms;
 }
 
-body.reveal-ready .achievement-card:nth-child(4) {
+body.reveal-ready .achievement-card.scroll-reveal:nth-child(4) {
   transition-delay: 270ms;
 }
 
@@ -566,7 +566,7 @@ body.reveal-ready .scroll-reveal.is-visible {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .achievement-visual-label {
@@ -620,6 +620,1140 @@ body.reveal-ready .scroll-reveal.is-visible {
   font-size: 0.9rem;
 }
 
+.project-journey {
+  position: relative;
+  margin-top: 1.75rem;
+}
+
+.project-journey__field,
+.project-journey__hud,
+.project-journey__status {
+  display: none;
+}
+
+.project-journey__track {
+  display: none;
+}
+
+.project-journey.is-enhanced {
+  padding-bottom: calc(var(--project-count) * var(--project-scroll-step));
+}
+
+.project-journey.is-enhanced .project-journey__stage {
+  position: sticky;
+  top: max(76px, calc((100svh - 660px) / 2));
+  height: min(620px, calc(100svh - 150px));
+  min-height: min(420px, calc(100svh - 120px));
+  isolation: isolate;
+  overflow: visible;
+  perspective: 1500px;
+  background: transparent;
+}
+
+.project-journey.is-enhanced .project-journey__field {
+  display: block;
+}
+
+.project-journey__field {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 24%;
+  background:
+    radial-gradient(ellipse at 50% 52%, rgba(63, 142, 252, 0.12), transparent 42%),
+    radial-gradient(ellipse at 20% 30%, rgba(117, 109, 255, 0.12), transparent 38%);
+  pointer-events: none;
+  transform: translate3d(var(--field-x, 0px), var(--field-y, 0px), 0);
+  transition: transform 450ms ease-out;
+}
+
+.project-journey__field::before,
+.project-journey__field::after {
+  position: absolute;
+  inset: -15%;
+  content: "";
+  pointer-events: none;
+}
+
+.project-journey__field::before {
+  opacity: 0.32;
+  background-image:
+    linear-gradient(rgba(117, 109, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 109, 255, 0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 8%, transparent 68%);
+  transform: perspective(760px) rotateX(64deg) scale(1.45);
+  transform-origin: center 78%;
+}
+
+.project-journey__field::after {
+  opacity: 0.55;
+  background-image:
+    radial-gradient(circle, rgba(119, 190, 255, 0.72) 1px, transparent 1.7px),
+    radial-gradient(circle, rgba(144, 131, 255, 0.6) 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.42) 1px, transparent 1.6px);
+  background-position:
+    0 0,
+    31px 47px,
+    76px 13px;
+  background-size:
+    112px 112px,
+    154px 154px,
+    196px 196px;
+  animation: project-particle-drift 32s linear infinite;
+  will-change: transform;
+}
+
+.project-journey__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(82%, 940px);
+  aspect-ratio: 2.3 / 1;
+  border: 1px solid rgba(117, 109, 255, 0.2);
+  border-radius: 50%;
+  box-shadow:
+    0 0 28px rgba(63, 142, 252, 0.08),
+    inset 0 0 28px rgba(117, 109, 255, 0.06);
+  transform: translate(-50%, -50%) rotateX(64deg);
+  animation: project-orbit-rotate 42s linear infinite;
+}
+
+.project-journey__orbit::after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(205, 226, 255, 0.8);
+  border-radius: 50%;
+  background: #79baff;
+  box-shadow:
+    0 0 10px rgba(63, 142, 252, 0.9),
+    0 0 24px rgba(117, 109, 255, 0.7);
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.project-journey__cards {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(4rem, 8vw, 7rem);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.project-journey__card {
+  --visual-tilt: 8deg;
+  --visual-roll: -2deg;
+  --content-tilt: -6deg;
+  --content-roll: 1.5deg;
+
+  display: grid;
+  width: min(100%, 1080px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  margin: 0 auto;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform-style: preserve-3d;
+}
+
+.project-journey__card:hover {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.project-journey__card .achievement-visual {
+  width: 100%;
+  min-height: 100%;
+  border: 1px solid rgba(117, 109, 255, 0.36);
+  border-radius: calc(var(--radius) + 5px);
+  box-shadow:
+    0 26px 56px rgba(0, 0, 0, 0.42),
+    0 0 34px rgba(63, 142, 252, 0.16);
+  transform:
+    perspective(1100px)
+    rotateY(var(--visual-tilt))
+    rotateZ(var(--visual-roll))
+    translateZ(32px);
+  animation: project-image-float 7s ease-in-out infinite;
+  transition:
+    transform 800ms cubic-bezier(0.2, 0.75, 0.22, 1),
+    box-shadow 800ms ease;
+}
+
+.project-journey__card .achievement-content {
+  position: relative;
+  width: 100%;
+  min-height: 290px;
+  justify-content: center;
+  border: 1px solid rgba(117, 109, 255, 0.32);
+  border-radius: calc(var(--radius) + 5px);
+  padding: clamp(1.6rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(117, 109, 255, 0.14), transparent 52%),
+    linear-gradient(150deg, rgba(18, 19, 30, 0.9), rgba(9, 10, 17, 0.84));
+  box-shadow:
+    0 26px 56px rgba(0, 0, 0, 0.38),
+    0 0 30px rgba(117, 109, 255, 0.12);
+  backdrop-filter: blur(14px);
+  transform:
+    perspective(1100px)
+    rotateY(var(--content-tilt))
+    rotateZ(var(--content-roll))
+    translateZ(18px);
+  animation: project-text-float 8s ease-in-out infinite;
+  transition:
+    transform 800ms cubic-bezier(0.2, 0.75, 0.22, 1),
+    box-shadow 800ms ease;
+}
+
+.project-journey__card .achievement-content h3 {
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+}
+
+.project-journey__card:nth-child(even) .achievement-visual {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.project-journey__card:nth-child(even) .achievement-content {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.project-journey__card:nth-child(2) {
+  --visual-tilt: -8deg;
+  --visual-roll: 3deg;
+  --content-tilt: 6deg;
+  --content-roll: -2deg;
+}
+
+.project-journey__card:nth-child(3) {
+  --visual-tilt: 7deg;
+  --visual-roll: -2deg;
+  --content-tilt: -9deg;
+  --content-roll: 1deg;
+}
+
+.project-journey__card:nth-child(4) {
+  --visual-tilt: -10deg;
+  --visual-roll: 2deg;
+  --content-tilt: 7deg;
+  --content-roll: -2deg;
+}
+
+.project-journey__card:hover .achievement-visual {
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.46),
+    0 0 42px rgba(63, 142, 252, 0.22);
+}
+
+.project-journey__card:hover .achievement-content {
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.42),
+    0 0 38px rgba(117, 109, 255, 0.18);
+}
+
+.project-journey__card:hover .achievement-visual img {
+  transform: scale(1.035);
+}
+
+.project-journey.is-enhanced .project-journey__cards {
+  position: absolute;
+  inset: 0;
+  display: block;
+  margin: 0;
+}
+
+.project-journey.is-enhanced .project-journey__card {
+  --visual-tilt: 9deg;
+  --visual-roll: -3deg;
+  --content-tilt: -7deg;
+  --content-roll: 2deg;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: min(1040px, calc(100% - 3rem));
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -48%) translateZ(-360px) scale(0.78);
+  filter: blur(8px) brightness(0.75);
+  visibility: hidden;
+  transform-style: preserve-3d;
+  transition:
+    opacity 780ms ease,
+    transform 900ms cubic-bezier(0.2, 0.75, 0.22, 1),
+    filter 780ms ease,
+    visibility 0s linear 900ms;
+  will-change: opacity, transform;
+}
+
+.project-journey.is-enhanced .project-journey__card.is-active {
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) translateZ(0) scale(1);
+  filter: none;
+  visibility: visible;
+  transition:
+    opacity 780ms ease,
+    transform 900ms cubic-bezier(0.2, 0.75, 0.22, 1),
+    filter 780ms ease,
+    visibility 0s;
+}
+
+.project-journey.is-enhanced .achievement-visual {
+  width: 100%;
+  min-height: 100%;
+  border: 1px solid rgba(117, 109, 255, 0.36);
+  border-radius: calc(var(--radius) + 5px);
+  box-shadow:
+    0 26px 56px rgba(0, 0, 0, 0.42),
+    0 0 34px rgba(63, 142, 252, 0.16);
+  transform:
+    perspective(1100px)
+    rotateY(var(--visual-tilt))
+    rotateZ(var(--visual-roll))
+    translateZ(42px);
+  transition:
+    transform 800ms cubic-bezier(0.2, 0.75, 0.22, 1),
+    box-shadow 800ms ease;
+}
+
+.project-journey.is-enhanced .achievement-content {
+  position: relative;
+  width: 100%;
+  min-height: 290px;
+  justify-content: center;
+  border: 1px solid rgba(117, 109, 255, 0.32);
+  border-radius: calc(var(--radius) + 5px);
+  padding: clamp(1.6rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(117, 109, 255, 0.14), transparent 52%),
+    linear-gradient(150deg, rgba(18, 19, 30, 0.9), rgba(9, 10, 17, 0.84));
+  box-shadow:
+    0 26px 56px rgba(0, 0, 0, 0.38),
+    0 0 30px rgba(117, 109, 255, 0.12);
+  backdrop-filter: blur(14px);
+  transform:
+    perspective(1100px)
+    rotateY(var(--content-tilt))
+    rotateZ(var(--content-roll))
+    translate3d(var(--content-x, 0px), var(--content-y, 0px), 18px);
+  transition:
+    transform 800ms cubic-bezier(0.2, 0.75, 0.22, 1),
+    box-shadow 800ms ease;
+}
+
+.project-journey.is-enhanced
+  .project-journey__card.is-active
+  .achievement-visual {
+  animation: project-image-float 7s ease-in-out infinite;
+}
+
+.project-journey.is-enhanced
+  .project-journey__card.is-active
+  .achievement-content {
+  animation: project-text-float 8s ease-in-out infinite;
+}
+
+.project-journey.is-enhanced .achievement-visual img {
+  transition:
+    transform 850ms cubic-bezier(0.2, 0.75, 0.22, 1),
+    filter 850ms ease;
+}
+
+.project-journey.is-enhanced .project-journey__card.is-active img {
+  transform: scale(1.035)
+    translate(var(--image-x, 0px), var(--image-y, 0px));
+}
+
+.project-journey.is-enhanced .project-journey__card:nth-child(2) {
+  --visual-tilt: -8deg;
+  --visual-roll: 3deg;
+  --content-tilt: 6deg;
+  --content-roll: -2deg;
+}
+
+.project-journey.is-enhanced .project-journey__card:nth-child(3) {
+  --visual-tilt: 7deg;
+  --visual-roll: -2deg;
+  --content-tilt: -9deg;
+  --content-roll: 1deg;
+}
+
+.project-journey.is-enhanced .project-journey__card:nth-child(4) {
+  --visual-tilt: -10deg;
+  --visual-roll: 2deg;
+  --content-tilt: 7deg;
+  --content-roll: -2deg;
+}
+
+.project-journey.is-enhanced
+  .project-journey__card:hover
+  .achievement-visual {
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.46),
+    0 0 42px rgba(63, 142, 252, 0.22);
+}
+
+.project-journey.is-enhanced
+  .project-journey__card:hover
+  .achievement-content {
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.42),
+    0 0 38px rgba(117, 109, 255, 0.18);
+}
+
+.project-journey.is-enhanced .achievement-content h3 {
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+}
+
+.project-journey__hud {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  pointer-events: none;
+}
+
+.project-journey.is-enhanced .project-journey__hud {
+  display: block;
+}
+
+.project-journey__hud span {
+  position: absolute;
+  max-width: 34%;
+  border: 1px solid rgba(117, 109, 255, 0.28);
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  background: rgba(8, 10, 19, 0.78);
+  box-shadow: 0 0 18px rgba(63, 142, 252, 0.08);
+  color: #c9dfff;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  animation: project-hud-float 6s ease-in-out infinite;
+}
+
+.project-journey__hud [data-project-hud="category"] {
+  top: 8%;
+  left: 4%;
+}
+
+.project-journey__hud [data-project-hud="stack"] {
+  top: 17%;
+  right: 3%;
+  animation-delay: -2s;
+}
+
+.project-journey__hud [data-project-hud="index"] {
+  right: 7%;
+  bottom: 8%;
+  color: #a59fff;
+  animation-delay: -4s;
+}
+
+.project-journey__status {
+  position: absolute;
+  z-index: 4;
+  top: 0.8rem;
+  right: 1rem;
+  max-width: calc(100% - 2rem);
+  margin: 0;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  background: rgba(6, 6, 12, 0.72);
+  color: var(--muted);
+  font-size: 0.78rem;
+  backdrop-filter: blur(8px);
+}
+
+.project-journey.is-enhanced .project-journey__status {
+  display: block;
+}
+
+.project-journey.is-enhanced .project-journey__track {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  display: grid;
+  height: calc(var(--project-count) * var(--project-scroll-step));
+  grid-template-rows: repeat(var(--project-count), var(--project-scroll-step));
+  pointer-events: none;
+}
+
+.project-journey__step {
+  display: block;
+}
+
+.project-journey.is-spatial
+  .project-journey__stage.is-transitioning
+  .project-journey__field::after {
+  animation: project-particle-burst 720ms ease-out;
+}
+
+.project-journey.is-spatial
+  .project-journey__stage.is-transitioning
+  .project-journey__card {
+  pointer-events: none;
+}
+
+@keyframes project-particle-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-12px, -24px, 0);
+  }
+}
+
+@keyframes project-particle-burst {
+  0% {
+    opacity: 0.32;
+    transform: translate3d(0, 18px, 0) scale(0.96);
+  }
+
+  45% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0.55;
+    transform: translate3d(0, -18px, 0) scale(1.04);
+  }
+}
+
+@keyframes project-orbit-rotate {
+  from {
+    transform: translate(-50%, -50%) rotateX(64deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotateX(64deg) rotateZ(360deg);
+  }
+}
+
+@keyframes project-image-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+@keyframes project-text-float {
+  0%,
+  100% {
+    translate: 0 4px;
+  }
+
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+@keyframes project-hud-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+.project-journey[data-project-journey] {
+  --project-scroll-step: 100svh;
+  --project-sticky-top: max(76px, calc((100svh - 760px) / 2));
+  margin-top: 1.75rem;
+}
+
+.project-journey__stage {
+  position: relative;
+}
+
+.project-journey__field,
+.project-journey__transit,
+.project-journey__status,
+.project-journey__scroll-space,
+.project-journey__track {
+  display: none;
+}
+
+.project-journey__core {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+.project-journey__card .achievement-content {
+  align-items: flex-start;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(117, 109, 255, 0.14), transparent 52%),
+    linear-gradient(150deg, rgba(18, 19, 30, 0.9), rgba(9, 10, 17, 0.84));
+  text-align: left;
+}
+
+.project-satellites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-satellite {
+  border: 1px solid rgba(117, 109, 255, 0.28);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  background: rgba(8, 10, 19, 0.78);
+  color: #c9dfff;
+  font-size: 0.78rem;
+}
+
+.project-satellite a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-journey.is-spatial {
+  padding-bottom: 0;
+}
+
+.project-journey.is-spatial .project-journey__scroll-space {
+  display: block;
+  height: calc(
+    (var(--project-count) - 1) * var(--project-scroll-step) +
+      var(--project-sticky-top) + 24px
+  );
+}
+
+.project-journey.is-spatial .project-journey__stage {
+  position: sticky;
+  top: var(--project-sticky-top);
+  height: min(760px, calc(100svh - 112px));
+  min-height: min(540px, calc(100svh - 100px));
+  isolation: isolate;
+  overflow: hidden;
+  perspective: 1600px;
+  transform-style: preserve-3d;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(32, 83, 151, 0.12), transparent 58%),
+    linear-gradient(180deg, rgba(5, 6, 12, 0.2), rgba(5, 6, 12, 0.42));
+}
+
+.project-journey.is-spatial .project-journey__field {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 18% 32%, rgba(117, 109, 255, 0.12), transparent 38%),
+    radial-gradient(ellipse at 82% 66%, rgba(63, 142, 252, 0.1), transparent 42%);
+  pointer-events: none;
+  transform: translate3d(var(--field-x, 0px), var(--field-y, 0px), 0);
+  transition: transform 450ms ease-out;
+}
+
+.project-journey.is-spatial .project-journey__transit {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  opacity: var(--transit-opacity, 0);
+  pointer-events: none;
+  transition: opacity 100ms linear;
+}
+
+.project-journey.is-spatial .project-journey__transit::before,
+.project-journey.is-spatial .project-journey__transit::after {
+  position: absolute;
+  inset: -24%;
+  content: "";
+  pointer-events: none;
+}
+
+.project-journey.is-spatial .project-journey__transit::before {
+  background-image:
+    radial-gradient(circle, rgba(205, 226, 255, 0.94) 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(119, 190, 255, 0.8) 1px, transparent 2px),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 77px,
+      rgba(119, 190, 255, 0.2) 78px 79px,
+      transparent 80px 156px
+    );
+  background-position:
+    0 0,
+    48px 31px,
+    center;
+  background-size:
+    104px 104px,
+    176px 176px,
+    100% 100%;
+  mask-image: radial-gradient(ellipse at center, #000 16%, transparent 74%);
+  transform:
+    perspective(580px)
+    rotateX(68deg)
+    scale(var(--transit-scale, 1.3));
+  transform-origin: center 70%;
+  animation: project-transit-stars 1.15s linear infinite;
+  animation-play-state: var(--transit-animation-state, paused);
+}
+
+.project-journey.is-spatial .project-journey__transit::after {
+  background:
+    radial-gradient(ellipse at center, rgba(63, 142, 252, 0.2), transparent 58%),
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg 14deg,
+      rgba(119, 190, 255, 0.13) 14.2deg 14.6deg,
+      transparent 15deg 30deg
+    );
+  mask-image: radial-gradient(ellipse at center, #000 4%, transparent 76%);
+  animation: project-transit-rays 7s ease-in-out infinite alternate;
+  animation-play-state: var(--transit-animation-state, paused);
+}
+
+.project-journey.is-spatial .project-journey__field::before,
+.project-journey.is-spatial .project-journey__field::after {
+  position: absolute;
+  inset: -15%;
+  content: "";
+  pointer-events: none;
+}
+
+.project-journey.is-spatial .project-journey__field::before {
+  opacity: 0.3;
+  background-image:
+    linear-gradient(rgba(117, 109, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 109, 255, 0.12) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(ellipse at center, #000 8%, transparent 68%);
+  transform:
+    perspective(760px)
+    rotateX(64deg)
+    translateY(var(--camera-drift, 0px))
+    scale(1.45);
+  transform-origin: center 78%;
+}
+
+.project-journey.is-spatial .project-journey__field::after {
+  opacity: 0.55;
+  background-image:
+    radial-gradient(circle, rgba(119, 190, 255, 0.72) 1px, transparent 1.7px),
+    radial-gradient(circle, rgba(144, 131, 255, 0.6) 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.42) 1px, transparent 1.6px);
+  background-position:
+    0 0,
+    31px 47px,
+    76px 13px;
+  background-size:
+    112px 112px,
+    154px 154px,
+    196px 196px;
+  animation: project-particle-drift 32s linear infinite;
+  will-change: transform;
+}
+
+.project-journey.is-spatial .project-journey__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(82%, 940px);
+  aspect-ratio: 2.3 / 1;
+  border: 1px solid rgba(117, 109, 255, 0.18);
+  border-radius: 50%;
+  box-shadow:
+    0 0 28px rgba(63, 142, 252, 0.08),
+    inset 0 0 28px rgba(117, 109, 255, 0.06);
+  transform: translate(-50%, -50%) rotateX(64deg);
+  animation: project-orbit-rotate 48s linear infinite;
+}
+
+.project-journey.is-spatial .project-journey__orbit::after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(205, 226, 255, 0.8);
+  border-radius: 50%;
+  background: #79baff;
+  box-shadow:
+    0 0 10px rgba(63, 142, 252, 0.9),
+    0 0 24px rgba(117, 109, 255, 0.7);
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.project-journey.is-spatial .project-journey__cards {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  margin: 0;
+  transform-style: preserve-3d;
+}
+
+.project-journey.is-spatial .project-journey__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: min(1040px, calc(100% - 2rem));
+  height: min(700px, 100%);
+  margin: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  opacity: var(--station-opacity, 0);
+  pointer-events: none;
+  transform:
+    translate3d(-50%, -50%, 0)
+    translateZ(var(--station-z, -1200px))
+    translateY(var(--station-y, 0px))
+    scale(var(--station-scale, 0.25))
+    rotateY(var(--station-rotation, 0deg));
+  filter: blur(var(--station-blur, 8px));
+  visibility: var(--station-visibility, visible);
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+}
+
+.project-journey.is-spatial .project-journey__card.is-active {
+  pointer-events: auto;
+}
+
+.project-journey.is-spatial .project-journey__core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: min(590px, 68%);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  justify-items: center;
+  transform: translate3d(-50%, -50%, 52px);
+  transform-style: preserve-3d;
+}
+
+.project-journey.is-spatial .project-journey__core > .achievement-visual,
+.project-journey.is-spatial .project-journey__core > .achievement-content {
+  grid-column: 1;
+  grid-row: auto;
+}
+
+.project-journey.is-spatial .achievement-visual {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  border: 1px solid rgba(119, 190, 255, 0.58);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow:
+    0 0 22px rgba(63, 142, 252, 0.24),
+    0 0 58px rgba(63, 142, 252, 0.16),
+    0 28px 72px rgba(0, 0, 0, 0.48);
+  animation:
+    project-image-float 8s ease-in-out infinite,
+    project-core-glow 5s ease-in-out infinite;
+  transition: box-shadow 500ms ease;
+}
+
+.project-journey.is-spatial .achievement-visual::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border: 1px solid rgba(119, 190, 255, 0.44);
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(63, 142, 252, 0.2), transparent 62%),
+    linear-gradient(145deg, rgba(7, 11, 22, 0.94), rgba(11, 17, 31, 0.97));
+  box-shadow: inset 0 0 44px rgba(63, 142, 252, 0.2);
+  content: "";
+  opacity: var(--station-silhouette-opacity, 0);
+  pointer-events: none;
+  transition: opacity 140ms linear;
+}
+
+.project-journey.is-spatial .achievement-visual::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border: 1px solid rgba(173, 219, 255, 0.24);
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 5px,
+    rgba(119, 190, 255, 0.035) 6px
+  );
+  box-shadow: inset 0 0 30px rgba(63, 142, 252, 0.12);
+  content: "";
+  pointer-events: none;
+}
+
+.project-journey.is-spatial .achievement-content {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  opacity: var(--station-detail-opacity, 1);
+  visibility: var(--station-detail-visibility, visible);
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  padding: 0.6rem 1rem;
+  background: none;
+  box-shadow: none;
+  text-align: center;
+  transform: translateZ(24px);
+  transition: opacity 120ms linear;
+}
+
+.project-journey.is-spatial .achievement-content h3 {
+  margin-bottom: 0.3rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+}
+
+.project-journey.is-spatial .achievement-content > p {
+  max-width: 62ch;
+  margin-bottom: 0;
+}
+
+.project-journey.is-spatial .achievement-actions {
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.project-journey.is-spatial .project-satellites {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  display: block;
+  margin: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.project-journey.is-spatial .project-satellite {
+  --satellite-delay: 0s;
+
+  position: absolute;
+  max-width: 180px;
+  border: 1px solid rgba(117, 177, 255, 0.42);
+  border-radius: 999px;
+  padding: 0.48rem 0.78rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(90, 158, 255, 0.16), transparent 80%),
+    rgba(7, 11, 22, 0.86);
+  box-shadow:
+    0 0 16px rgba(63, 142, 252, 0.22),
+    inset 0 0 12px rgba(117, 109, 255, 0.08);
+  color: #d3e6ff;
+  opacity: var(--station-satellite-opacity, 1);
+  visibility: var(--station-satellite-visibility, visible);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.035em;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+  transform:
+    translate3d(
+      calc(-50% + var(--satellite-parallax-x, 0px)),
+      calc(-50% + var(--satellite-parallax-y, 0px)),
+      42px
+    )
+    scale(var(--station-satellite-scale, 1));
+  animation: project-satellite-float 7s ease-in-out var(--satellite-delay) infinite;
+  transition:
+    opacity 140ms linear,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    color 300ms ease;
+}
+
+.project-journey.is-spatial .project-satellite a {
+  color: inherit;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+.project-journey.is-spatial .project-satellite a:focus-visible {
+  outline: 2px solid #9dc2ff;
+  outline-offset: 3px;
+}
+
+.project-journey.is-spatial .project-satellite:hover {
+  border-color: rgba(173, 219, 255, 0.82);
+  box-shadow:
+    0 0 24px rgba(63, 142, 252, 0.4),
+    inset 0 0 14px rgba(117, 109, 255, 0.12);
+  color: #fff;
+}
+
+.project-satellite--northwest {
+  top: 16%;
+  left: 12%;
+  --satellite-delay: -1.6s;
+}
+
+.project-satellite--northeast {
+  top: 17%;
+  left: 88%;
+  --satellite-delay: -3.2s;
+}
+
+.project-satellite--west {
+  top: 55%;
+  left: 7%;
+  --satellite-delay: -2.4s;
+}
+
+.project-satellite--east {
+  top: 58%;
+  left: 93%;
+  --satellite-delay: -4.5s;
+}
+
+.project-satellite--southwest {
+  top: 87%;
+  left: 19%;
+  --satellite-delay: -0.8s;
+}
+
+.project-satellite--southeast {
+  top: 88%;
+  left: 81%;
+  --satellite-delay: -3.8s;
+}
+
+.project-satellite--north {
+  top: 6%;
+  left: 50%;
+  --satellite-delay: -2.8s;
+}
+
+.project-satellite--south {
+  top: 95%;
+  left: 50%;
+  --satellite-delay: -1.2s;
+}
+
+.project-journey.is-spatial .project-journey__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.project-journey.is-spatial .project-journey__track {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  display: grid;
+  height: calc(var(--project-count) * var(--project-scroll-step));
+  grid-template-rows: repeat(var(--project-count), var(--project-scroll-step));
+  pointer-events: none;
+}
+
+.project-journey.is-spatial .project-journey__step {
+  display: block;
+}
+
+.project-journey.is-transitioning .project-journey__field::after {
+  animation: project-particle-burst 720ms ease-out;
+}
+
+@keyframes project-transit-stars {
+  from {
+    background-position:
+      0 0,
+      48px 31px,
+      center;
+  }
+
+  to {
+    background-position:
+      104px 104px,
+      -128px -145px,
+      center;
+  }
+}
+
+@keyframes project-transit-rays {
+  from {
+    transform: rotate(-8deg) scale(0.94);
+  }
+
+  to {
+    transform: rotate(8deg) scale(1.06);
+  }
+}
+
+@keyframes project-satellite-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+@keyframes project-core-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 22px rgba(63, 142, 252, 0.24),
+      0 0 58px rgba(63, 142, 252, 0.16),
+      0 28px 72px rgba(0, 0, 0, 0.48);
+  }
+
+  50% {
+    box-shadow:
+      0 0 30px rgba(63, 142, 252, 0.34),
+      0 0 72px rgba(63, 142, 252, 0.22),
+      0 32px 80px rgba(0, 0, 0, 0.5);
+  }
+}
+
 .github-link {
   border-color: rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.06);
@@ -662,6 +1796,89 @@ body.reveal-ready .scroll-reveal.is-visible {
 }
 
 @media (max-width: 850px) {
+  .project-journey.is-enhanced .project-journey__card {
+    width: calc(100% - 2rem);
+  }
+
+  .project-journey__cards {
+    gap: 3.75rem;
+  }
+
+  .project-journey__card {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.15rem;
+  }
+
+  .project-journey__core {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-journey__core > .achievement-visual,
+  .project-journey__core > .achievement-content {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .project-journey__card .achievement-visual {
+    width: 86%;
+    aspect-ratio: 2.4 / 1;
+    min-height: 0;
+    justify-self: start;
+    transform: perspective(900px) rotateY(5deg) rotateZ(-1.5deg) translateZ(16px);
+  }
+
+  .project-journey__card .achievement-content {
+    width: 94%;
+    min-height: 0;
+    justify-self: end;
+    padding: 1rem;
+    transform: perspective(900px) rotateY(-4deg) rotateZ(1deg) translateZ(24px);
+  }
+
+  .project-journey__card:nth-child(even) .achievement-visual {
+    grid-column: 1;
+    grid-row: 1;
+    transform: perspective(900px) rotateY(-5deg) rotateZ(1.5deg) translateZ(16px);
+  }
+
+  .project-journey__card:nth-child(even) .achievement-content {
+    grid-column: 1;
+    grid-row: 2;
+    transform: perspective(900px) rotateY(4deg) rotateZ(-1deg) translateZ(24px);
+  }
+
+  .project-journey__card .achievement-content h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1.25rem;
+  }
+
+  .project-journey[data-project-journey] {
+    --project-scroll-step: 92svh;
+    --project-sticky-top: 72px;
+  }
+
+  .project-journey.is-spatial .project-journey__stage {
+    top: 72px;
+    height: min(700px, calc(100svh - 96px));
+    min-height: min(480px, calc(100svh - 88px));
+  }
+
+  .project-journey.is-spatial .project-journey__card {
+    width: calc(100% - 1rem);
+    height: 100%;
+  }
+
+  .project-journey.is-spatial .project-journey__core {
+    width: min(520px, 76%);
+  }
+
+  .project-journey.is-spatial .project-satellite {
+    max-width: 150px;
+    padding: 0.42rem 0.65rem;
+    font-size: 0.72rem;
+  }
+
   .nav-inner {
     position: relative;
   }
@@ -725,6 +1942,68 @@ body.reveal-ready .scroll-reveal.is-visible {
     padding: 4rem 0;
   }
 
+  .project-journey.is-spatial .project-journey__stage {
+    height: min(680px, calc(100svh - 88px));
+    min-height: min(500px, calc(100svh - 80px));
+  }
+
+  .project-journey.is-spatial .project-journey__core {
+    width: min(460px, 82%);
+  }
+
+  .project-journey.is-spatial .project-journey__core .achievement-content {
+    padding: 0.55rem 0.35rem;
+  }
+
+  .project-journey.is-spatial .project-journey__core .achievement-content > p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .project-journey.is-spatial .project-satellite {
+    max-width: 128px;
+    padding: 0.36rem 0.55rem;
+    font-size: 0.66rem;
+  }
+
+  .project-satellite--northwest {
+    top: 9%;
+    left: 24%;
+  }
+
+  .project-satellite--northeast {
+    top: 9%;
+    left: 76%;
+  }
+
+  .project-satellite--west {
+    top: 32%;
+    left: 8%;
+  }
+
+  .project-satellite--east {
+    top: 33%;
+    left: 92%;
+  }
+
+  .project-satellite--southwest {
+    top: 91%;
+    left: 24%;
+  }
+
+  .project-satellite--southeast {
+    top: 91%;
+    left: 76%;
+  }
+
+  .project-satellite--north {
+    top: 4%;
+  }
+
+  .project-satellite--south {
+    top: 96%;
+  }
+
   .hero-content {
     gap: 0.8rem;
   }
@@ -745,6 +2024,61 @@ body.reveal-ready .scroll-reveal.is-visible {
 
   .skill-wheel__stage {
     height: 560px;
+  }
+
+  .project-journey {
+    --project-scroll-step: 72svh;
+  }
+
+  .project-journey.is-enhanced .project-journey__stage {
+    top: 76px;
+    height: min(600px, calc(100svh - 150px));
+    min-height: min(440px, calc(100svh - 120px));
+  }
+
+  .project-journey.is-enhanced .project-journey__card {
+    width: calc(100% - 1rem);
+    max-height: none;
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .project-journey.is-enhanced .achievement-visual {
+    width: 86%;
+    aspect-ratio: 2.4 / 1;
+    min-height: 0;
+    justify-self: start;
+    transform: perspective(900px) rotateY(5deg) rotateZ(-1.5deg) translateZ(16px);
+  }
+
+  .project-journey.is-enhanced .achievement-content {
+    width: 94%;
+    min-height: 0;
+    justify-self: end;
+    padding: 1rem;
+    transform: perspective(900px) rotateY(-4deg) rotateZ(1deg) translateZ(24px);
+  }
+
+  .project-journey.is-enhanced .achievement-content h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1.25rem;
+  }
+
+  .project-journey.is-enhanced
+    .project-journey__card:nth-child(even)
+    .achievement-visual {
+    transform: perspective(900px) rotateY(-5deg) rotateZ(1.5deg) translateZ(16px);
+  }
+
+  .project-journey.is-enhanced
+    .project-journey__card:nth-child(even)
+    .achievement-content {
+    transform: perspective(900px) rotateY(4deg) rotateZ(-1deg) translateZ(24px);
+  }
+
+  .project-journey__hud [data-project-hud="stack"],
+  .project-journey__hud [data-project-hud="index"] {
+    display: none;
   }
 
   .skill-card {
@@ -788,6 +2122,27 @@ body.reveal-ready .scroll-reveal.is-visible {
 
   .skill-card.is-active {
     animation: none;
+  }
+
+  .project-journey__field::after,
+  .project-journey__orbit,
+  .project-journey__hud span,
+  .project-journey.is-enhanced .project-journey__card.is-active {
+    animation: none;
+  }
+
+  .project-journey.is-enhanced
+    .project-journey__card.is-active
+    .achievement-visual,
+  .project-journey.is-enhanced
+    .project-journey__card.is-active
+    .achievement-content {
+    animation: none;
+  }
+
+  .project-journey.is-enhanced .project-journey__card,
+  .project-journey.is-enhanced .project-journey__card.is-active {
+    transition: none;
   }
 
   *,
