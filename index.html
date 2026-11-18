@@ -53,10 +53,9 @@
           />
           <h1>Lucas Ribet</h1>
           <p class="subtitle">Technicien Support Utilisateurs</p>
-          <p class="description">
-            Spécialisé dans l'assistance Microsoft 365, le diagnostic des
-            incidents utilisateurs et le développement d'outils permettant
-            d'améliorer la productivité.
+          <p class="description" id="intro-phrase">
+            "Je suis peut-être paresseux, mais automatiser une tâche est souvent
+            plus rapide que la refaire 100 fois."
           </p>
           <div class="hero-buttons">
             <a
@@ -102,42 +101,104 @@
       <section id="skills" class="section section-alt">
         <div class="container">
           <h2 class="scroll-reveal">Compétences</h2>
-          <div class="skill-grid">
-            <article class="skill-card scroll-reveal">
-              <h3>Support Utilisateurs</h3>
-              <ul class="skill-tags">
-                <li>Gestion des incidents</li>
-                <li>Diagnostic et résolution</li>
-                <li>Assistance à distance</li>
-                <li>Gestion des tickets</li>
-              </ul>
-            </article>
-            <article class="skill-card scroll-reveal">
-              <h3>Microsoft 365</h3>
-              <p class="skill-group-label">Environnement Microsoft</p>
-              <ul class="skill-tags">
-                <li>Exchange Online</li>
-                <li>Suite Office</li>
-                <li>Microsoft Teams</li>
-                <li>Entra ID</li>
-                <li>Groupes Microsoft 365</li>
-                <li>Power BI</li>
-              </ul>
-              <ul class="skill-tags">
-                <li>Elium</li>
-                <li>Google Workspace (Suite Google)</li>
-              </ul>
-            </article>
-            <article class="skill-card scroll-reveal">
-              <h3>Développement</h3>
-              <ul class="skill-tags">
-                <li>JavaScript</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Extensions navigateur</li>
-                <li>Automatisation</li>
-              </ul>
-            </article>
+          <div class="skill-wheel">
+            <div
+              class="skill-wheel__stage"
+              id="skill-wheel"
+              role="region"
+              aria-label="Roue des catégories de compétences"
+              aria-roledescription="carrousel 3D"
+              tabindex="0"
+            >
+              <div class="skill-wheel__ring">
+                <article
+                  class="skill-card scroll-reveal"
+                  role="group"
+                  aria-roledescription="carte"
+                  aria-label="1 sur 5 : Support Utilisateurs"
+                >
+                  <h3>Support Utilisateurs</h3>
+                  <ul class="skill-tags">
+                    <li>Gestion des incidents</li>
+                    <li>Diagnostic et résolution</li>
+                    <li>Assistance à distance</li>
+                    <li>Gestion des tickets</li>
+                    <li>Support multi-outils</li>
+                    <li>Communication utilisateur</li>
+                    <li>Gestion des urgences</li>
+                  </ul>
+                </article>
+                <article
+                  class="skill-card scroll-reveal"
+                  role="group"
+                  aria-roledescription="carte"
+                  aria-label="2 sur 5 : Microsoft 365"
+                >
+                  <h3>Microsoft 365</h3>
+                  <p class="skill-group-label">Environnement Microsoft</p>
+                  <ul class="skill-tags">
+                    <li>Exchange Online</li>
+                    <li>Suite Office</li>
+                    <li>Microsoft Teams</li>
+                    <li>Entra ID</li>
+                    <li>Groupes Microsoft 365</li>
+                    <li>OneDrive</li>
+                  </ul>
+                </article>
+                <article
+                  class="skill-card scroll-reveal"
+                  role="group"
+                  aria-roledescription="carte"
+                  aria-label="3 sur 5 : Outils spécifiques"
+                >
+                  <h3>Outils spécifiques</h3>
+                  <ul class="skill-tags">
+                    <li>Power BI</li>
+                    <li>Linux</li>
+                    <li>Google Workspace</li>
+                    <li>Elium</li>
+                    <li>GitHub</li>
+                    <li>Visual Studio Code</li>
+                    <li>Figma</li>
+                    <li>Webflow</li>
+                  </ul>
+                </article>
+                <article
+                  class="skill-card scroll-reveal"
+                  role="group"
+                  aria-roledescription="carte"
+                  aria-label="4 sur 5 : Développement"
+                >
+                  <h3>Développement</h3>
+                  <ul class="skill-tags">
+                    <li>JavaScript</li>
+                    <li>HTML</li>
+                    <li>Python</li>
+                    <li>CSS</li>
+                    <li>Extensions navigateur</li>
+                    <li>Automatisation</li>
+                    <li>PowerShell</li>
+                  </ul>
+                </article>
+                <article
+                  class="skill-card scroll-reveal"
+                  role="group"
+                  aria-roledescription="carte"
+                  aria-label="5 sur 5 : Équipements et Infrastructure"
+                >
+                  <h3>Équipements &amp; Infrastructure</h3>
+                  <ul class="skill-tags">
+                    <li>Postes Windows</li>
+                    <li>Smartphones</li>
+                    <li>Imprimantes</li>
+                    <li>Écrans &amp; Docking Stations</li>
+                    <li>Réseau local</li>
+                    <li>Déploiement matériel IT</li>
+                    <li>iPhone &amp; Android</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
           </div>
         </div>
       </section>
