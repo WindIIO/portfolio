@@ -114,6 +114,15 @@ button:focus-visible {
   text-align: center;
 }
 
+.hero::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: clamp(5rem, 12vw, 9rem);
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  content: "";
+  pointer-events: none;
+}
+
 .overlay {
   position: absolute;
   inset: 0;
@@ -223,8 +232,17 @@ button:focus-visible {
 }
 
 .section-alt {
-  border-block: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(16, 16, 22, 0.58);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(16, 16, 22, 0.58) 8rem,
+    rgba(16, 16, 22, 0.58) calc(100% - 8rem),
+    transparent
+  );
+}
+
+#achievements {
+  overflow-x: clip;
 }
 
 .section h2 {
@@ -1190,6 +1208,8 @@ body.reveal-ready .scroll-reveal.is-visible {
 .project-journey[data-project-journey] {
   --project-scroll-step: 100svh;
   --project-sticky-top: max(76px, calc((100svh - 760px) / 2));
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   margin-top: 1.75rem;
 }
 
@@ -1763,10 +1783,6 @@ body.reveal-ready .scroll-reveal.is-visible {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.contact {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
 .contact .container > p {
   margin-bottom: 1rem;
   color: var(--muted);
@@ -1787,9 +1803,8 @@ body.reveal-ready .scroll-reveal.is-visible {
 }
 
 .footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1.2rem 0;
-  background: #050506;
+  background: linear-gradient(to bottom, var(--bg), #050506 4rem);
   color: var(--muted);
   text-align: center;
   font-size: 0.9rem;
