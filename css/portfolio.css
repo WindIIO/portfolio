@@ -1278,10 +1278,12 @@ body.reveal-ready .scroll-reveal.is-visible {
 .project-journey.is-spatial .project-journey__stage {
   position: sticky;
   top: var(--project-sticky-top);
+  width: 100%;
   height: min(760px, calc(100svh - 112px));
   min-height: min(540px, calc(100svh - 100px));
   isolation: isolate;
   overflow: hidden;
+  border-radius: 0;
   perspective: 1600px;
   transform-style: preserve-3d;
   background:
@@ -1450,7 +1452,7 @@ body.reveal-ready .scroll-reveal.is-visible {
   top: 50%;
   left: 50%;
   display: block;
-  width: min(1040px, calc(100% - 2rem));
+  width: min(1140px, calc(100% - 2rem));
   height: min(700px, 100%);
   margin: 0;
   overflow: visible;
@@ -1481,7 +1483,7 @@ body.reveal-ready .scroll-reveal.is-visible {
   top: 50%;
   left: 50%;
   display: grid;
-  width: min(590px, 68%);
+  width: min(1000px, 90%);
   grid-template-columns: minmax(0, 1fr);
   gap: 0.5rem;
   justify-items: center;
@@ -1499,8 +1501,8 @@ body.reveal-ready .scroll-reveal.is-visible {
   width: 100%;
   aspect-ratio: 16 / 9;
   min-height: 0;
-  border: 1px solid rgba(119, 190, 255, 0.58);
-  border-radius: calc(var(--radius) + 6px);
+  border: 0;
+  border-radius: 0;
   box-shadow:
     0 0 22px rgba(63, 142, 252, 0.24),
     0 0 58px rgba(63, 142, 252, 0.16),
@@ -1515,8 +1517,8 @@ body.reveal-ready .scroll-reveal.is-visible {
   position: absolute;
   z-index: 1;
   inset: 0;
-  border: 1px solid rgba(119, 190, 255, 0.44);
-  border-radius: inherit;
+  border: 0;
+  border-radius: 0;
   background:
     radial-gradient(ellipse at 50% 45%, rgba(63, 142, 252, 0.2), transparent 62%),
     linear-gradient(145deg, rgba(7, 11, 22, 0.94), rgba(11, 17, 31, 0.97));
@@ -1885,7 +1887,7 @@ body.reveal-ready .scroll-reveal.is-visible {
   }
 
   .project-journey.is-spatial .project-journey__core {
-    width: min(520px, 76%);
+    width: min(740px, 90%);
   }
 
   .project-journey.is-spatial .project-satellite {
@@ -1963,7 +1965,7 @@ body.reveal-ready .scroll-reveal.is-visible {
   }
 
   .project-journey.is-spatial .project-journey__core {
-    width: min(460px, 82%);
+    width: min(540px, 90%);
   }
 
   .project-journey.is-spatial .project-journey__core .achievement-content {

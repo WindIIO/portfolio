@@ -334,38 +334,36 @@ if (projectJourney && !projectReduceMotion) {
         const absoluteDistance = Math.abs(distance);
         const isOutgoing = distance < 0;
         const depth = Math.min(
-          2200,
-          Math.pow(absoluteDistance, 1.32) * 920 + (isOutgoing ? 180 : 0),
+          1800,
+          Math.pow(absoluteDistance, 1.22) * 760 + (isOutgoing ? 110 : 0),
         );
         const scale = Math.max(
-          0.08,
-          1 - absoluteDistance * 0.32 - (isOutgoing ? 0.08 : 0),
+          0.2,
+          1 - absoluteDistance * 0.27 - (isOutgoing ? 0.04 : 0),
         );
         const opacity = Math.max(
           0,
-          1 - absoluteDistance * (isOutgoing ? 1.1 : 0.68),
+          1 - absoluteDistance * 0.78,
         );
         const detailOpacity = Math.max(
           0,
           Math.min(
             1,
-            1 -
-              Math.max(0, absoluteDistance - 0.12) /
-                (isOutgoing ? 0.3 : 0.48),
+            1 - Math.max(0, absoluteDistance - 0.1) / 0.8,
           ),
         );
         const satelliteOpacity = Math.max(
           0,
-          1 - Math.max(0, absoluteDistance - 0.12) / 0.28,
+          1 - Math.max(0, absoluteDistance - 0.1) / 0.5,
         );
         const satelliteScale = Math.max(
-          0.72,
-          1 - Math.max(0, absoluteDistance - 0.12) * 0.35,
+          0.78,
+          1 - Math.max(0, absoluteDistance - 0.12) * 0.28,
         );
         const silhouetteOpacity =
           distance > 0.08
             ? Math.min(
-                1,
+                0.48,
                 Math.max(0, (distance - 0.08) / 0.32),
                 Math.max(0, (1.35 - distance) / 0.35),
               )
@@ -410,7 +408,7 @@ if (projectJourney && !projectReduceMotion) {
         card.style.setProperty("--station-y", `${verticalOffset}px`);
         card.style.setProperty(
           "--station-blur",
-          `${Math.min(8, absoluteDistance * 2.2)}px`,
+          `${Math.min(5, absoluteDistance * 1.6)}px`,
         );
         card.style.zIndex = String(
           100 - Math.round(absoluteDistance * 10),
